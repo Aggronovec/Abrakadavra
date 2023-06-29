@@ -1,0 +1,23 @@
+{
+  "type": "minecraft:crafting_shaped",
+  "pattern": [
+    " X ",
+    "$&$",
+    " & "
+  ],
+  "key": {
+    "X": {
+      "item": "minecraft:end_crystal"
+    },
+    "$": {
+      "item": "minecraft:lapis_lazuli"
+    },
+    "&": {
+      "item": "abrakadavra:wand_handle"
+    }
+  },
+  "result": {
+    "item": "abrakadavra:wand",
+    "count": 1
+  }
+}

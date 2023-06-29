@@ -1,0 +1,26 @@
+{
+  "type": "minecraft:crafting_shaped",
+  "pattern": [
+    " X ",
+    "$#$",
+    " & "
+  ],
+  "key": {
+    "#": {
+      "item": "minecraft:blaze_rod"
+    },
+    "X": {
+      "item": "minecraft:amethyst_shard"
+    },
+    "$": {
+      "item": "minecraft:diamond"
+    },
+    "&": {
+      "item": "minecraft:stick"
+    }
+  },
+  "result": {
+    "item": "abrakadavra:wand_handle",
+    "count": 1
+  }
+}

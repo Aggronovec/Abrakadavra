@@ -1,0 +1,23 @@
+{
+  "type": "minecraft:crafting_shaped",
+  "pattern": [
+    "$X$",
+    "X#X",
+    "$X$"
+  ],
+  "key": {
+    "#": {
+      "item": "minecraft:prismarine"
+    },
+    "X": {
+      "item": "minecraft:stone"
+    },
+    "$": {
+      "item": "minecraft:emerald"
+    }
+  },
+  "result": {
+    "item": "abrakadavra:wizard_block",
+    "count": 1
+  }
+}
