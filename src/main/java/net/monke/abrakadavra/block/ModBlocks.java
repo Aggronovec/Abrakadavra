@@ -1,6 +1,7 @@
 package net.monke.abrakadavra.block;
 
 import net.monke.abrakadavra.Abrakadavra;
+import net.monke.abrakadavra.block.custom.WizardTable;
 import net.monke.abrakadavra.item.ModAbrakadavraTab;
 import net.monke.abrakadavra.item.ModItems;
 import net.minecraft.world.item.BlockItem;
@@ -23,6 +24,9 @@ public class ModBlocks {
     public static final RegistryObject<Block> WIZARD_BLOCK = registerBlock("wizard_block",
             () -> new Block(BlockBehaviour.Properties.of(Material.STONE)
                     .strength(4f).requiresCorrectToolForDrops()), ModAbrakadavraTab.ABRAKADAVRA_TAB);
+    public static final RegistryObject<Block> WIZARD_TABLE = registerBlock("wizard_table",
+            () -> new WizardTable(BlockBehaviour.Properties.of(Material.STONE)
+                    .strength(5f).requiresCorrectToolForDrops()), ModAbrakadavraTab.ABRAKADAVRA_TAB);
 
     private static <T extends Block> RegistryObject<T> registerBlock(String name, Supplier<T> block, CreativeModeTab tab) {
         RegistryObject<T> toReturn = BLOCKS.register(name, block);
