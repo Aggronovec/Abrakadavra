@@ -1,9 +1,11 @@
 {
   "item.abrakadavra.wand_handle": "Rukoväť prútika",
-  "item.abrakadavra.wand": "Prútik Abrakadavra",
+  "item.abrakadavra.wand": "§dPrútik Abrakadavra§r",
 
   "block.abrakadavra.wizard_block": "Čarodejníkov blok",
   "block.abrakadavra.wizard_table": "Čarodejníkov stôl",
 
-  "itemGroup.abrakadavratab": "Abrakadavra Mód"
+  "itemGroup.abrakadavratab": "Abrakadavra Mód",
+
+  "tooltip.abrakadavra.wand.tooltip": "§8---------------------:§r"
 }

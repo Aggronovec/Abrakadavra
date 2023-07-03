@@ -1,9 +1,11 @@
 {
   "item.abrakadavra.wand_handle": "Rukojeť hůlky",
-  "item.abrakadavra.wand": "Hůlka Abrakadavra",
+  "item.abrakadavra.wand": "§dHůlka Abrakadavra§r",
 
   "block.abrakadavra.wizard_block": "Čarodějnický blok",
   "block.abrakadavra.wizard_table": "Čarodějnický stůl",
 
-  "itemGroup.abrakadavratab": "Abrakadavra Mód"
+  "itemGroup.abrakadavratab": "Abrakadavra Mód",
+
+  "tooltip.abrakadavra.wand.tooltip": "§8--------------------:§r"
 }
