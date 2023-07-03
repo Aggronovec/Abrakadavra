@@ -1,11 +1,15 @@
 {
   "item.abrakadavra.wand_handle": "Rukojeť hůlky",
+  "item.abrakadavra.ice_bolt_spell_scroll": "Svitek ledu",
+  "item.abrakadavra.levitation_blast_spell_scroll": "Svitek levitace",
+  "item.abrakadavra.fire_spell_scroll": "Svitek ohně",
+
   "item.abrakadavra.wand": "§dHůlka Abrakadavra§r",
 
   "block.abrakadavra.wizard_block": "Čarodějnický blok",
   "block.abrakadavra.wizard_table": "Čarodějnický stůl",
 
-  "itemGroup.abrakadavratab": "Abrakadavra Mód",
+  "itemGroup.abrakadavratab": "Abrakadavra mód",
 
-  "tooltip.abrakadavra.wand.tooltip": "§8--------------------:§r"
+  "tooltip.abrakadavra.wand.tooltip": "§8Kouzlo přiřazené k hůlce:§r"
 }

@@ -1,11 +1,14 @@
 {
-  "item.abrakadavra.wand_handle": "Wand Handle",
-  "item.abrakadavra.wand": "§dAbrakadavra Wand§r",
+  "item.abrakadavra.wand_handle": "Wand handle",
+  "item.abrakadavra.ice_bolt_spell_scroll": "The scroll of ice",
+  "item.abrakadavra.levitation_blast_spell_scroll": "The scroll of levitation",
+  "item.abrakadavra.fire_spell_scroll": "The scroll of fire",
+  "item.abrakadavra.wand": "§dAbrakadavra wand§r",
 
-  "block.abrakadavra.wizard_block": "Wizard Block",
-  "block.abrakadavra.wizard_table": "Wizard Table",
+  "block.abrakadavra.wizard_block": "Wizard block",
+  "block.abrakadavra.wizard_table": "Wizard table",
 
-  "itemGroup.abrakadavratab": "Abrakadavra Mod",
+  "itemGroup.abrakadavratab": "Abrakadavra mod",
 
   "tooltip.abrakadavra.wand.tooltip": "§8Spells assigned to wand:§r"
 }

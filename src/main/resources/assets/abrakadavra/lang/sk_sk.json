@@ -1,11 +1,15 @@
 {
   "item.abrakadavra.wand_handle": "Rukoväť prútika",
+  "item.abrakadavra.ice_bolt_spell_scroll": "Zvitok ľadu",
+  "item.abrakadavra.levitation_blast_spell_scroll": "Zvitok levitácie",
+  "item.abrakadavra.fire_spell_scroll": "Zvitok ohňa",
+
   "item.abrakadavra.wand": "§dPrútik Abrakadavra§r",
 
   "block.abrakadavra.wizard_block": "Čarodejníkov blok",
   "block.abrakadavra.wizard_table": "Čarodejníkov stôl",
 
-  "itemGroup.abrakadavratab": "Abrakadavra Mód",
+  "itemGroup.abrakadavratab": "Abrakadavra mód",
 
-  "tooltip.abrakadavra.wand.tooltip": "§8---------------------:§r"
+  "tooltip.abrakadavra.wand.tooltip": "§8Kúzlo priradené k prútiku:§r"
 }
