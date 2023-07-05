@@ -17,7 +17,7 @@ public class FireSpellItem extends Item {
     @Override
     public InteractionResultHolder<ItemStack> use(Level pLevel, Player pPlayer, InteractionHand pUsedHand) {
         if(pPlayer.getLevel().isClientSide()) {
-            pPlayer.displayClientMessage(new TextComponent("You have just learnt an Ice Bolt!"), true);
+            pPlayer.displayClientMessage(new TextComponent("You have just learnt a fire spell!"), true);
             pPlayer.getItemInHand(pUsedHand).shrink(1);
             pPlayer.playSound(SoundEvents.BOOK_PAGE_TURN,1.0F, 1.0F);
 
