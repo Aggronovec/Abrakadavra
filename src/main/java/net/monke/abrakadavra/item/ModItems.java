@@ -26,7 +26,7 @@ public class ModItems {
     public static final RegistryObject<Item> LEVITATION_BLAST_SPELL_SCROLL = ITEMS.register("levitation_blast_spell_scroll", () -> new LevitationBlastSpellItem(new Item.Properties().tab(ModAbrakadavraTab.ABRAKADAVRA_TAB).
             stacksTo(1)));
     public static final RegistryObject<Item> FIRE_SPELL_SCROLL = ITEMS.register("fire_spell_scroll", () -> new FireSpellItem(new Item.Properties().tab(ModAbrakadavraTab.ABRAKADAVRA_TAB).
-            stacksTo(1)));
+            stacksTo(1))); //Fire spell is only work name, it's functionality and rela name is to be created
 
     public static void register(IEventBus eventBus) {
         ITEMS.register(eventBus);
