@@ -17,24 +17,18 @@ public class LevitationBlastSpellItem extends Item {
     public LevitationBlastSpellItem(Properties properties) {
         super(properties);
     }
+
     @Override
     public InteractionResultHolder<ItemStack> use(Level pLevel, Player pPlayer, InteractionHand pUsedHand) {
 //        if(pPlayer.getLevel().isClientSide()) {
         if (!pLevel.isClientSide()) {
             learnSpell(pPlayer, "Levitation Blast");
-//            if (learnSpell(pPlayer, "AAALevitation Blast")) { //these lines were enabled in the first version where we didn't do antyhing on the client side, only on server's side
-//                pPlayer.displayClientMessage(new TextComponent("You have just learnt a levitation blast!"), true);
-//                pPlayer.getItemInHand(pUsedHand).shrink(1);
-//                pPlayer.playSound(SoundEvents.BOOK_PAGE_TURN, 1.0F, 1.0F);
-//            } else {
-//                pPlayer.displayClientMessage(new TextComponent("You already know the levitation blast spell!"), true);
-//                pPlayer.playSound(SoundEvents.BOOK_PAGE_TURN, 1.0F, 1.0F);
-//                        }
+            pPlayer.getInventory().removeItem(pPlayer.getItemInHand(pUsedHand));
         }
         else {
             if (needtolearn) {
                 pPlayer.displayClientMessage(new TextComponent("You have just learnt a Levitation Blast!"), true);
-                pPlayer.getItemInHand(pUsedHand).shrink(1);
+
                 pPlayer.playSound(SoundEvents.BOOK_PAGE_TURN, 1.0F, 1.0F);
             }
             else {
@@ -64,5 +58,4 @@ public class LevitationBlastSpellItem extends Item {
             return true;
         }
     }
-
 }

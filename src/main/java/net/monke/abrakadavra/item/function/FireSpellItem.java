@@ -22,6 +22,7 @@ public class FireSpellItem extends Item {
 //        if(pPlayer.getLevel().isClientSide()) {
         if (!pLevel.isClientSide()) {
             learnSpell(pPlayer, "Fire Spell");
+            pPlayer.getInventory().removeItem(pPlayer.getItemInHand(pUsedHand));
 //            if (learnSpell(pPlayer, "AAALevitation Blast")) { //these lines were enabled in the first version where we didn't do antyhing on the client side, only on server's side
 //                pPlayer.displayClientMessage(new TextComponent("You have just learnt a levitation blast!"), true);
 //                pPlayer.getItemInHand(pUsedHand).shrink(1);
@@ -34,12 +35,11 @@ public class FireSpellItem extends Item {
         else {
             if (needtolearn) {
                 pPlayer.displayClientMessage(new TextComponent("You have just learnt a Fire Spell!"), true);
-                pPlayer.getItemInHand(pUsedHand).shrink(1);
-                pPlayer.playSound(SoundEvents.BOOK_PAGE_TURN, 1.0F, 1.0F);
+                pPlayer.playSound(SoundEvents.BOOK_PAGE_TURN, 100.0F, 100.0F);
             }
             else {
                 pPlayer.displayClientMessage(new TextComponent("You already know the Fire Spell!"), true);
-                pPlayer.playSound(SoundEvents.BOOK_PAGE_TURN, 1.0F, 1.0F);
+                pPlayer.playSound(SoundEvents.BOOK_PAGE_TURN, 100.0F, 100.0F);
             }
         }
         return super.use(pLevel, pPlayer, pUsedHand);

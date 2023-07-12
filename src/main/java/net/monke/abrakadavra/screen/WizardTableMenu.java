@@ -15,7 +15,7 @@ import net.minecraftforge.items.SlotItemHandler;
 import net.monke.abrakadavra.block.ModBlocks;
 import net.monke.abrakadavra.block.entity.WizardTableBlockEntity;
 import net.monke.abrakadavra.screen.slot.ModFuelSlot;
-import net.monke.abrakadavra.screen.slot.ModResultSlot;
+import net.monke.abrakadavra.screen.slot.WandSlot;
 import org.jetbrains.annotations.Nullable;
 
 public class WizardTableMenu extends AbstractContainerMenu {
@@ -25,10 +25,9 @@ public class WizardTableMenu extends AbstractContainerMenu {
     public WizardTableMenu(int windowId, Inventory inv, FriendlyByteBuf extraData) {
         this(windowId, inv, inv.player.level.getBlockEntity(extraData.readBlockPos()));
     }
-
     public WizardTableMenu(int windowId, Inventory inv, BlockEntity entity) {
         super(ModMenuTypes.WIZARD_TABLE_MENU.get(), windowId);
-        checkContainerSize(inv, 4);
+        checkContainerSize(inv, 1);
         blockEntity = ((WizardTableBlockEntity) entity);
         this.level = inv.player.level;
 
@@ -37,9 +36,7 @@ public class WizardTableMenu extends AbstractContainerMenu {
 
         this.blockEntity.getCapability(CapabilityItemHandler.ITEM_HANDLER_CAPABILITY).ifPresent(handler -> {
 //            this.addSlot(new ModFuelSlot(handler, 0, 18, 50));
-            this.addSlot(new SlotItemHandler(handler, 0, 37, 16));
-            this.addSlot(new SlotItemHandler(handler, 1, 66, 16));
-            this.addSlot(new ModResultSlot(handler, 2, 116, 30));
+            this.addSlot(new WandSlot(handler, 0, 80, 45));
         });
     }
 
@@ -57,9 +54,8 @@ public class WizardTableMenu extends AbstractContainerMenu {
     private static final int VANILLA_SLOT_COUNT = HOTBAR_SLOT_COUNT + PLAYER_INVENTORY_SLOT_COUNT;
     private static final int VANILLA_FIRST_SLOT_INDEX = 0;
     private static final int TE_INVENTORY_FIRST_SLOT_INDEX = VANILLA_FIRST_SLOT_INDEX + VANILLA_SLOT_COUNT;
-
     // THIS YOU HAVE TO DEFINE!
-    private static final int TE_INVENTORY_SLOT_COUNT = 3;  // must be the number of slots you have!
+    private static final int TE_INVENTORY_SLOT_COUNT = 1;  // must be the number of slots you have!
 
     @Override
     public ItemStack quickMoveStack(Player playerIn, int index) {

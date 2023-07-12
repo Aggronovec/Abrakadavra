@@ -36,16 +36,13 @@ public class WizardTableBlockEntity extends BlockEntity implements MenuProvider 
         }
     };
     private LazyOptional<IItemHandler> lazyItemHandler = LazyOptional.empty();
-
     public WizardTableBlockEntity(BlockPos pWorldPosition, BlockState pBlockState) {
         super(ModBlockEntities.WIZARD_TABLE.get(), pWorldPosition, pBlockState);
     }
-
     @Override
     public Component getDisplayName() {
         return new TextComponent("Wizard Table");
     }
-
     @Nullable
     @Override
     public AbstractContainerMenu createMenu(int pContainerId, Inventory pInventory, Player pPlayer) {
@@ -57,7 +54,6 @@ public class WizardTableBlockEntity extends BlockEntity implements MenuProvider 
         if (cap == CapabilityItemHandler.ITEM_HANDLER_CAPABILITY) {
             return lazyItemHandler.cast();
         }
-
         return super.getCapability(cap, side);
     }
     @Override
@@ -65,7 +61,6 @@ public class WizardTableBlockEntity extends BlockEntity implements MenuProvider 
         super.onLoad();
         lazyItemHandler = LazyOptional.of(() -> itemHandler);
     }
-
     @Override
     public void invalidateCaps()  {
         super.invalidateCaps();
@@ -90,24 +85,22 @@ public class WizardTableBlockEntity extends BlockEntity implements MenuProvider 
         Containers.dropContents(this.level, this.worldPosition, inventory);
     }
     public static void tick(Level pLevel, BlockPos pPos, BlockState pState, WizardTableBlockEntity pBlockEntity) {
-        if(hasRecipe(pBlockEntity) && hasNotReachedStackLimit(pBlockEntity)) {
-            craftItem(pBlockEntity);
-        }
+//        if(hasRecipe(pBlockEntity) && hasNotReachedStackLimit(pBlockEntity)) {
+//            craftItem(pBlockEntity);
+//        }
     }
-    private static void craftItem(WizardTableBlockEntity entity) {
-        entity.itemHandler.extractItem(0, 1, false);
-        entity.itemHandler.extractItem(1, 1, false);
-
-        entity.itemHandler.setStackInSlot(2, new ItemStack(ModItems.WAND.get(),
-                entity.itemHandler.getStackInSlot(2).getCount() + 1));
-    }
-    private static boolean hasRecipe(WizardTableBlockEntity entity) {
-        boolean hasItemInFirstSlot = entity.itemHandler.getStackInSlot(0).getItem() == ModItems.WAND_HANDLE.get();
-        boolean hasItemInSecondSlot = entity.itemHandler.getStackInSlot(0).getItem() == ModItems.WAND_HANDLE.get();
-
-        return hasItemInFirstSlot && hasItemInSecondSlot;
-    }
-    private static boolean hasNotReachedStackLimit(WizardTableBlockEntity entity) {
-        return entity.itemHandler.getStackInSlot(3).getCount() < entity.itemHandler.getStackInSlot(3).getMaxStackSize();
-    }
+//    private static void craftItem(WizardTableBlockEntity entity) {
+//        entity.itemHandler.extractItem(0, 1, false);
+//        entity.itemHandler.extractItem(1, 1, false);
+//        entity.itemHandler.setStackInSlot(2, new ItemStack(ModItems.WAND.get(),
+//                entity.itemHandler.getStackInSlot(2).getCount() + 1));
+//    }
+//   private static boolean hasRecipe(WizardTableBlockEntity entity) {
+//        boolean hasItemInFirstSlot = entity.itemHandler.getStackInSlot(0).getItem() == ModItems.WAND_HANDLE.get();
+//        boolean hasItemInSecondSlot = entity.itemHandler.getStackInSlot(0).getItem() == ModItems.WAND_HANDLE.get();
+//        return hasItemInFirstSlot && hasItemInSecondSlot;
+//    }
+//    private static boolean hasNotReachedStackLimit(WizardTableBlockEntity entity) {
+//        return entity.itemHandler.getStackInSlot(3).getCount() < entity.itemHandler.getStackInSlot(3).getMaxStackSize();
+//    }
 }

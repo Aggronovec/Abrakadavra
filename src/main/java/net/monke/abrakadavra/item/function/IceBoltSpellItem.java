@@ -25,6 +25,7 @@ public class IceBoltSpellItem extends Item {
 //        if(pPlayer.getLevel().isClientSide()) {
         if (!pLevel.isClientSide()) {
             learnSpell(pPlayer, "Ice Bolt");
+            pPlayer.getInventory().removeItem(pPlayer.getItemInHand(pUsedHand));
 //            if (learnSpell(pPlayer, "AAALevitation Blast")) { //these lines were enabled in the first version where we didn't do antyhing on the client side, only on server's side
 //                pPlayer.displayClientMessage(new TextComponent("You have just learnt a levitation blast!"), true);
 //                pPlayer.getItemInHand(pUsedHand).shrink(1);
@@ -37,7 +38,6 @@ public class IceBoltSpellItem extends Item {
         else {
             if (needtolearn) {
                 pPlayer.displayClientMessage(new TextComponent("You have just learnt an Ice Bolt!"), true);
-                pPlayer.getItemInHand(pUsedHand).shrink(1);
                 pPlayer.playSound(SoundEvents.BOOK_PAGE_TURN, 1.0F, 1.0F);
             }
             else {
