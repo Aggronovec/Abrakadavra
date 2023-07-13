@@ -1,0 +1,9 @@
+{
+"parent": "minecraft:block/orientable_with_bottom",
+"textures": {
+  "top": "abrakadavra:block/rune_table_top",
+  "bottom": "abrakadavra:block/rune_table_bottom",
+  "side": "abrakadavra:block/rune_table_side",
+  "front": "abrakadavra:block/rune_table_side"
+}
+}

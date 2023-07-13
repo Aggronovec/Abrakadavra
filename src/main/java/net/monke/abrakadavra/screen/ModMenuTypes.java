@@ -9,14 +9,13 @@ import net.minecraftforge.network.IContainerFactory;
 import net.minecraftforge.registries.DeferredRegister;
 import net.minecraftforge.registries.ForgeRegistries;
 import net.minecraftforge.registries.RegistryObject;
-import net.monke.abrakadavra.block.custom.WizardTable;
 
 public class ModMenuTypes {
     public static final DeferredRegister<MenuType<?>> MENUS =
             DeferredRegister.create(ForgeRegistries.CONTAINERS, Abrakadavra.MOD_ID);
 
-    public static final RegistryObject<MenuType<WizardTableMenu>> WIZARD_TABLE_MENU =
-            registerMenuType(WizardTableMenu::new, "wizard_table_menu");
+    public static final RegistryObject<MenuType<RuneTableMenu>> RUNE_TABLE_MENU =
+            registerMenuType(RuneTableMenu::new, "wizard_table_menu");
 
 
     private static <T extends AbstractContainerMenu> RegistryObject<MenuType<T>> registerMenuType(IContainerFactory<T> factory,

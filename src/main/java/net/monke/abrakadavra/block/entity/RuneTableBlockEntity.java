@@ -11,24 +11,21 @@ import net.minecraft.world.SimpleContainer;
 import net.minecraft.world.entity.player.Inventory;
 import net.minecraft.world.entity.player.Player;
 import net.minecraft.world.inventory.AbstractContainerMenu;
-import net.minecraft.world.item.ItemStack;
 import net.minecraft.world.level.Level;
 import net.minecraft.world.level.block.entity.BlockEntity;
-import net.minecraft.world.level.block.entity.BlockEntityType;
 import net.minecraft.world.level.block.state.BlockState;
 import net.minecraftforge.common.capabilities.Capability;
 import net.minecraftforge.common.util.LazyOptional;
 import net.minecraftforge.items.CapabilityItemHandler;
 import net.minecraftforge.items.IItemHandler;
 import net.minecraftforge.items.ItemStackHandler;
-import net.monke.abrakadavra.item.ModItems;
-import net.monke.abrakadavra.screen.WizardTableMenu;
+import net.monke.abrakadavra.screen.RuneTableMenu;
 import org.jetbrains.annotations.NotNull;
 import org.jetbrains.annotations.Nullable;
 
 import javax.annotation.Nonnull;
 
-public class WizardTableBlockEntity extends BlockEntity implements MenuProvider {
+public class RuneTableBlockEntity extends BlockEntity implements MenuProvider {
     private final ItemStackHandler itemHandler = new ItemStackHandler(4) {
         @Override
         protected void onContentsChanged(int slot) {
@@ -36,8 +33,8 @@ public class WizardTableBlockEntity extends BlockEntity implements MenuProvider 
         }
     };
     private LazyOptional<IItemHandler> lazyItemHandler = LazyOptional.empty();
-    public WizardTableBlockEntity(BlockPos pWorldPosition, BlockState pBlockState) {
-        super(ModBlockEntities.WIZARD_TABLE.get(), pWorldPosition, pBlockState);
+    public RuneTableBlockEntity(BlockPos pWorldPosition, BlockState pBlockState) {
+        super(ModBlockEntities.RUNE_TABLE.get(), pWorldPosition, pBlockState);
     }
     @Override
     public Component getDisplayName() {
@@ -46,7 +43,7 @@ public class WizardTableBlockEntity extends BlockEntity implements MenuProvider 
     @Nullable
     @Override
     public AbstractContainerMenu createMenu(int pContainerId, Inventory pInventory, Player pPlayer) {
-        return new WizardTableMenu(pContainerId, pInventory, this);
+        return new RuneTableMenu(pContainerId, pInventory, this);
     }
     @Nonnull
     @Override
@@ -84,7 +81,7 @@ public class WizardTableBlockEntity extends BlockEntity implements MenuProvider 
 
         Containers.dropContents(this.level, this.worldPosition, inventory);
     }
-    public static void tick(Level pLevel, BlockPos pPos, BlockState pState, WizardTableBlockEntity pBlockEntity) {
+    public static void tick(Level pLevel, BlockPos pPos, BlockState pState, RuneTableBlockEntity pBlockEntity) {
 //        if(hasRecipe(pBlockEntity) && hasNotReachedStackLimit(pBlockEntity)) {
 //            craftItem(pBlockEntity);
 //        }

@@ -1,9 +1,0 @@
-{
-"parent": "minecraft:block/orientable_with_bottom",
-"textures": {
-  "top": "abrakadavra:block/wizard_table_top",
-  "bottom": "abrakadavra:block/wizard_table_bottom",
-  "side": "abrakadavra:block/wizard_table_side",
-  "front": "abrakadavra:block/wizard_table_side"
-}
-}

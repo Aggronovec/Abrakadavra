@@ -5,30 +5,26 @@ import net.minecraft.world.entity.player.Inventory;
 import net.minecraft.world.entity.player.Player;
 import net.minecraft.world.inventory.AbstractContainerMenu;
 import net.minecraft.world.inventory.ContainerLevelAccess;
-import net.minecraft.world.inventory.MenuType;
 import net.minecraft.world.inventory.Slot;
 import net.minecraft.world.item.ItemStack;
 import net.minecraft.world.level.Level;
 import net.minecraft.world.level.block.entity.BlockEntity;
 import net.minecraftforge.items.CapabilityItemHandler;
-import net.minecraftforge.items.SlotItemHandler;
 import net.monke.abrakadavra.block.ModBlocks;
-import net.monke.abrakadavra.block.entity.WizardTableBlockEntity;
-import net.monke.abrakadavra.screen.slot.ModFuelSlot;
+import net.monke.abrakadavra.block.entity.RuneTableBlockEntity;
 import net.monke.abrakadavra.screen.slot.WandSlot;
-import org.jetbrains.annotations.Nullable;
 
-public class WizardTableMenu extends AbstractContainerMenu {
-    private final WizardTableBlockEntity blockEntity;
+public class RuneTableMenu extends AbstractContainerMenu {
+    private final RuneTableBlockEntity blockEntity;
     private final Level level;
 
-    public WizardTableMenu(int windowId, Inventory inv, FriendlyByteBuf extraData) {
+    public RuneTableMenu(int windowId, Inventory inv, FriendlyByteBuf extraData) {
         this(windowId, inv, inv.player.level.getBlockEntity(extraData.readBlockPos()));
     }
-    public WizardTableMenu(int windowId, Inventory inv, BlockEntity entity) {
-        super(ModMenuTypes.WIZARD_TABLE_MENU.get(), windowId);
+    public RuneTableMenu(int windowId, Inventory inv, BlockEntity entity) {
+        super(ModMenuTypes.RUNE_TABLE_MENU.get(), windowId);
         checkContainerSize(inv, 1);
-        blockEntity = ((WizardTableBlockEntity) entity);
+        blockEntity = ((RuneTableBlockEntity) entity);
         this.level = inv.player.level;
 
         addPlayerInventory(inv);
@@ -92,7 +88,7 @@ public class WizardTableMenu extends AbstractContainerMenu {
     @Override
     public boolean stillValid(Player pPlayer) {
         return stillValid(ContainerLevelAccess.create(level, blockEntity.getBlockPos()),
-                pPlayer, ModBlocks.WIZARD_TABLE.get());
+                pPlayer, ModBlocks.RUNE_TABLE.get());
     }
     private void addPlayerInventory(Inventory playerInventory) {
         for (int i = 0; i < 3; ++i) {

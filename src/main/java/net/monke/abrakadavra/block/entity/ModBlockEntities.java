@@ -11,8 +11,8 @@ import net.monke.abrakadavra.block.ModBlocks;
 public class ModBlockEntities {
         public static final DeferredRegister<BlockEntityType<?>> BLOCK_ENTITIES =
                 DeferredRegister.create(ForgeRegistries.BLOCK_ENTITIES, Abrakadavra.MOD_ID);
-        public static final RegistryObject<BlockEntityType<WizardTableBlockEntity>> WIZARD_TABLE = BLOCK_ENTITIES.register("wizard_table",
-                () -> BlockEntityType.Builder.of(WizardTableBlockEntity::new, ModBlocks.WIZARD_TABLE.get()).build(null));
+        public static final RegistryObject<BlockEntityType<RuneTableBlockEntity>> RUNE_TABLE = BLOCK_ENTITIES.register("rune_table",
+                () -> BlockEntityType.Builder.of(RuneTableBlockEntity::new, ModBlocks.RUNE_TABLE.get()).build(null));
 
         public static void register(IEventBus eventBus) {
             BLOCK_ENTITIES.register(eventBus);

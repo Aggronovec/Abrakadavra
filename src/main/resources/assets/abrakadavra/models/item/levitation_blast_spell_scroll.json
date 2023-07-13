@@ -1,6 +1,6 @@
 {
   "parent": "item/generated",
   "textures": {
-    "layer0": "abrakadavra:item/spell_scroll"
+    "layer0": "abrakadavra:item/scroll/air_spell_scroll"
   }
 }

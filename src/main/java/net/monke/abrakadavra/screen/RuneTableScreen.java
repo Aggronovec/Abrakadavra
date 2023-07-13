@@ -2,14 +2,6 @@ package net.monke.abrakadavra.screen;
 
 import com.mojang.blaze3d.systems.RenderSystem;
 import com.mojang.blaze3d.vertex.PoseStack;
-import net.minecraft.Util;
-import net.minecraft.client.gui.screens.inventory.InventoryScreen;
-import net.minecraft.nbt.CompoundTag;
-import net.minecraft.network.chat.TextComponent;
-import net.minecraft.world.entity.player.Player;
-import net.minecraft.world.inventory.ClickType;
-import net.minecraft.world.inventory.Slot;
-import net.minecraft.world.level.block.PlayerWallHeadBlock;
 import net.monke.abrakadavra.Abrakadavra;
 import net.minecraft.client.gui.screens.inventory.AbstractContainerScreen;
 import net.minecraft.client.renderer.GameRenderer;
@@ -17,12 +9,12 @@ import net.minecraft.network.chat.Component;
 import net.minecraft.resources.ResourceLocation;
 import net.minecraft.world.entity.player.Inventory;
 
-public class WizardTableScreen extends AbstractContainerScreen<WizardTableMenu> {
+public class RuneTableScreen extends AbstractContainerScreen<RuneTableMenu> {
     private static final ResourceLocation TEXTURE =
-            new ResourceLocation(Abrakadavra.MOD_ID, "textures/gui/wizard_table_gui.png");
+            new ResourceLocation(Abrakadavra.MOD_ID, "textures/gui/rune_table_gui.png");
 //    public String LEARNED_SPELLS_KEY = "LearnedSpells";
 
-    public WizardTableScreen(WizardTableMenu pMenu, Inventory pPlayerInventory, Component pTitle) {
+    public RuneTableScreen(RuneTableMenu pMenu, Inventory pPlayerInventory, Component pTitle) {
         super(pMenu, pPlayerInventory, pTitle);
     }
 

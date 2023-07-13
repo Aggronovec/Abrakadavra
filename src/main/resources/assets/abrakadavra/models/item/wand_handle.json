@@ -1,6 +1,6 @@
 {
   "parent": "item/generated",
   "textures": {
-    "layer0": "abrakadavra:item/wand_handle"
+    "layer0": "abrakadavra:item/wand/wand_handle"
   }
 }

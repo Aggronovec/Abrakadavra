@@ -11,35 +11,29 @@ import net.minecraft.world.item.Item;
 import net.minecraft.world.item.ItemStack;
 import net.minecraft.world.level.Level;
 
-public class FireSpellItem extends Item {
-    private boolean needtolearn = true;
+public class LevitationBlastSpellScroll extends Item {
     public String LEARNED_SPELLS_KEY = "LearnedSpells";
-    public FireSpellItem(Properties properties) {
+    private boolean needtolearn = true;
+    public LevitationBlastSpellScroll(Properties properties) {
         super(properties);
     }
+
     @Override
     public InteractionResultHolder<ItemStack> use(Level pLevel, Player pPlayer, InteractionHand pUsedHand) {
 //        if(pPlayer.getLevel().isClientSide()) {
         if (!pLevel.isClientSide()) {
-            learnSpell(pPlayer, "Fire Spell");
+            learnSpell(pPlayer, "Levitation Blast");
             pPlayer.getInventory().removeItem(pPlayer.getItemInHand(pUsedHand));
-//            if (learnSpell(pPlayer, "AAALevitation Blast")) { //these lines were enabled in the first version where we didn't do antyhing on the client side, only on server's side
-//                pPlayer.displayClientMessage(new TextComponent("You have just learnt a levitation blast!"), true);
-//                pPlayer.getItemInHand(pUsedHand).shrink(1);
-//                pPlayer.playSound(SoundEvents.BOOK_PAGE_TURN, 1.0F, 1.0F);
-//            } else {
-//                pPlayer.displayClientMessage(new TextComponent("You already know the levitation blast spell!"), true);
-//                pPlayer.playSound(SoundEvents.BOOK_PAGE_TURN, 1.0F, 1.0F);
-//                        }
         }
         else {
             if (needtolearn) {
-                pPlayer.displayClientMessage(new TextComponent("You have just learnt a Fire Spell!"), true);
-                pPlayer.playSound(SoundEvents.BOOK_PAGE_TURN, 100.0F, 100.0F);
+                pPlayer.displayClientMessage(new TextComponent("You have just learnt a Levitation Blast!"), true);
+
+                pPlayer.playSound(SoundEvents.BOOK_PAGE_TURN, 1.0F, 1.0F);
             }
             else {
-                pPlayer.displayClientMessage(new TextComponent("You already know the Fire Spell!"), true);
-                pPlayer.playSound(SoundEvents.BOOK_PAGE_TURN, 100.0F, 100.0F);
+                pPlayer.displayClientMessage(new TextComponent("You already know the Levitation Blast spell!"), true);
+                pPlayer.playSound(SoundEvents.BOOK_PAGE_TURN, 1.0F, 1.0F);
             }
         }
         return super.use(pLevel, pPlayer, pUsedHand);

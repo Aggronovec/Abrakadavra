@@ -12,10 +12,9 @@ import net.monke.abrakadavra.block.entity.ModBlockEntities;
 import net.monke.abrakadavra.item.ModItems;
 import net.monke.abrakadavra.block.ModBlocks;
 import net.monke.abrakadavra.screen.ModMenuTypes;
-import net.monke.abrakadavra.screen.WizardTableScreen;
+import net.monke.abrakadavra.screen.RuneTableScreen;
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
-import java.util.stream.Collectors;
 
 @Mod(Abrakadavra.MOD_ID)
 public class Abrakadavra
@@ -44,7 +43,7 @@ public class Abrakadavra
     }
         private void clientSetup (final FMLClientSetupEvent event)
         {
-        MenuScreens.register(ModMenuTypes.WIZARD_TABLE_MENU.get(), WizardTableScreen::new);
+        MenuScreens.register(ModMenuTypes.RUNE_TABLE_MENU.get(), RuneTableScreen::new);
 
     }
 

@@ -1,12 +1,12 @@
 {
   "item.abrakadavra.wand_handle": "Wand handle",
-  "item.abrakadavra.ice_bolt_spell_scroll": "The scroll of ice",
-  "item.abrakadavra.levitation_blast_spell_scroll": "The scroll of levitation",
-  "item.abrakadavra.fire_spell_scroll": "The scroll of fire",
+  "item.abrakadavra.ice_bolt_spell_scroll": "Spell Scroll of Ice",
+  "item.abrakadavra.levitation_blast_spell_scroll": "Spell Scroll of Air",
+  "item.abrakadavra.summon_demised_spell_scroll": "Spell Scroll of Necromancy",
   "item.abrakadavra.wand": "§dAbrakadavra wand§r",
 
-  "block.abrakadavra.wizard_block": "Wizard block",
-  "block.abrakadavra.wizard_table": "Wizard table",
+  "block.abrakadavra.rune_block": "Rune Block",
+  "block.abrakadavra.rune_table": "Rune Table",
 
   "itemGroup.abrakadavratab": "Abrakadavra mod",
 
