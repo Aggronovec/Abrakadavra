@@ -16,7 +16,9 @@ import net.minecraftforge.event.entity.living.LivingEntityUseItemEvent;
 import net.minecraftforge.eventbus.api.SubscribeEvent;
 import net.minecraftforge.fml.common.Mod;
 
-public class IceBoltSpellScroll extends Item {
+import static net.monke.abrakadavra.item.function.LevitationBlastSpellScroll.LEARNED_SPELLS_KEY;
+
+public class IceBoltSpellScroll extends Item { //Tento scroll si Aggron rozbil tak donho nebudem zasahovat, CD
 
     public IceBoltSpellScroll(Properties pProperties) {
         super(pProperties);

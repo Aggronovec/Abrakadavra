@@ -37,14 +37,12 @@ public class Abrakadavra
         eventBus.addListener(this::setup);
         eventBus.addListener(this::clientSetup);
 
-
         // Register ourselves for server and other game events we are interested in
         MinecraftForge.EVENT_BUS.register(this);
     }
         private void clientSetup (final FMLClientSetupEvent event)
         {
         MenuScreens.register(ModMenuTypes.RUNE_TABLE_MENU.get(), RuneTableScreen::new);
-
     }
 
     private void setup(final FMLCommonSetupEvent event)

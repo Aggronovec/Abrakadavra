@@ -12,6 +12,7 @@ import net.minecraft.world.level.block.entity.BlockEntity;
 import net.minecraftforge.items.CapabilityItemHandler;
 import net.monke.abrakadavra.block.ModBlocks;
 import net.monke.abrakadavra.block.entity.RuneTableBlockEntity;
+import net.monke.abrakadavra.screen.slot.SpellSlot;
 import net.monke.abrakadavra.screen.slot.WandSlot;
 
 public class RuneTableMenu extends AbstractContainerMenu {
@@ -33,9 +34,11 @@ public class RuneTableMenu extends AbstractContainerMenu {
         this.blockEntity.getCapability(CapabilityItemHandler.ITEM_HANDLER_CAPABILITY).ifPresent(handler -> {
 //            this.addSlot(new ModFuelSlot(handler, 0, 18, 50));
             this.addSlot(new WandSlot(handler, 0, 80, 45));
+            this.addSlot(new SpellSlot(handler, 1, 176, 90));
+            this.addSlot(new SpellSlot(handler, 2, 191, 90));
+            this.addSlot(new SpellSlot(handler, 3, 206, 90));
         });
     }
-
     // CREDIT GOES TO: diesieben07 | https://github.com/diesieben07/SevenCommons
     // must assign a slot number to each of the slots used by the GUI.
     // For this container, we can see both the tile inventory's slots as well as the player inventory slots and the hotbar.
@@ -51,7 +54,7 @@ public class RuneTableMenu extends AbstractContainerMenu {
     private static final int VANILLA_FIRST_SLOT_INDEX = 0;
     private static final int TE_INVENTORY_FIRST_SLOT_INDEX = VANILLA_FIRST_SLOT_INDEX + VANILLA_SLOT_COUNT;
     // THIS YOU HAVE TO DEFINE!
-    private static final int TE_INVENTORY_SLOT_COUNT = 1;  // must be the number of slots you have!
+    private static final int TE_INVENTORY_SLOT_COUNT = 4;  // must be the number of slots you have!
 
     @Override
     public ItemStack quickMoveStack(Player playerIn, int index) {

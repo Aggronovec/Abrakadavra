@@ -11,9 +11,11 @@ import net.minecraft.world.item.Item;
 import net.minecraft.world.item.ItemStack;
 import net.minecraft.world.level.Level;
 
+import static net.monke.abrakadavra.item.function.LevitationBlastSpellScroll.LEARNED_SPELLS_KEY;
+
 public class SummonDemisedSpellScroll extends Item {
     private boolean needtolearn = true;
-    public String LEARNED_SPELLS_KEY = "LearnedSpells";
+//    public static boolean knowsSummonDemisedSpell;
     public SummonDemisedSpellScroll(Properties properties) {
         super(properties);
     }
@@ -21,8 +23,9 @@ public class SummonDemisedSpellScroll extends Item {
     public InteractionResultHolder<ItemStack> use(Level pLevel, Player pPlayer, InteractionHand pUsedHand) {
 //        if(pPlayer.getLevel().isClientSide()) {
         if (!pLevel.isClientSide()) {
-            learnSpell(pPlayer, "Fire Spell");
+            learnSpell(pPlayer, "Summon Demised");
             pPlayer.getInventory().removeItem(pPlayer.getItemInHand(pUsedHand));
+//            knowsSummonDemisedSpell = true;
 //            if (learnSpell(pPlayer, "AAALevitation Blast")) { //these lines were enabled in the first version where we didn't do antyhing on the client side, only on server's side
 //                pPlayer.displayClientMessage(new TextComponent("You have just learnt a levitation blast!"), true);
 //                pPlayer.getItemInHand(pUsedHand).shrink(1);

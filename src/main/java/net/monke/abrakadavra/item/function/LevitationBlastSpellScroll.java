@@ -12,8 +12,9 @@ import net.minecraft.world.item.ItemStack;
 import net.minecraft.world.level.Level;
 
 public class LevitationBlastSpellScroll extends Item {
-    public String LEARNED_SPELLS_KEY = "LearnedSpells";
+    public static String LEARNED_SPELLS_KEY = "LearnedSpells";
     private boolean needtolearn = true;
+//    public static boolean knowsLevitationBlast; //this was planned functionality but it isn't implemented
     public LevitationBlastSpellScroll(Properties properties) {
         super(properties);
     }
@@ -24,6 +25,7 @@ public class LevitationBlastSpellScroll extends Item {
         if (!pLevel.isClientSide()) {
             learnSpell(pPlayer, "Levitation Blast");
             pPlayer.getInventory().removeItem(pPlayer.getItemInHand(pUsedHand));
+//            knowsLevitationBlast = true;
         }
         else {
             if (needtolearn) {

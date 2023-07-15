@@ -38,7 +38,7 @@ public class RuneTableBlockEntity extends BlockEntity implements MenuProvider {
     }
     @Override
     public Component getDisplayName() {
-        return new TextComponent("Wizard Table");
+        return new TextComponent("Rune Table");
     }
     @Nullable
     @Override

@@ -15,7 +15,7 @@ public class ModMenuTypes {
             DeferredRegister.create(ForgeRegistries.CONTAINERS, Abrakadavra.MOD_ID);
 
     public static final RegistryObject<MenuType<RuneTableMenu>> RUNE_TABLE_MENU =
-            registerMenuType(RuneTableMenu::new, "wizard_table_menu");
+            registerMenuType(RuneTableMenu::new, "rune_table_menu");
 
 
     private static <T extends AbstractContainerMenu> RegistryObject<MenuType<T>> registerMenuType(IContainerFactory<T> factory,

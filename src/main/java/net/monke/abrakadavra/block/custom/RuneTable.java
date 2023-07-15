@@ -1,6 +1,7 @@
 package net.monke.abrakadavra.block.custom;
 
 import net.minecraft.core.BlockPos;
+import net.minecraft.nbt.CompoundTag;
 import net.minecraft.server.level.ServerPlayer;
 import net.minecraft.world.InteractionHand;
 import net.minecraft.world.InteractionResult;
@@ -18,12 +19,15 @@ import net.monke.abrakadavra.block.entity.ModBlockEntities;
 import net.monke.abrakadavra.block.entity.RuneTableBlockEntity;
 import org.jetbrains.annotations.Nullable;
 
+import static net.monke.abrakadavra.item.function.LevitationBlastSpellScroll.LEARNED_SPELLS_KEY;
+
 public class RuneTable extends BaseEntityBlock {
 
     public RuneTable(Properties properties) {
         super(properties);
     }
-
+    public static boolean HasLevitationBlastspell = false;
+    public static boolean HasSummonDemisedSpell = false;
     @Override
     public RenderShape getRenderShape(BlockState pState) {
         return RenderShape.MODEL;
@@ -38,8 +42,7 @@ public class RuneTable extends BaseEntityBlock {
         }
     }
     @Override
-    public InteractionResult use(BlockState pState, Level pLevel, BlockPos pPos,
-                                 Player pPlayer, InteractionHand pHand, BlockHitResult pHit) {
+    public InteractionResult use(BlockState pState, Level pLevel, BlockPos pPos, Player pPlayer, InteractionHand pHand, BlockHitResult pHit) {
         if (!pLevel.isClientSide()) {
             BlockEntity entity = pLevel.getBlockEntity(pPos);
             if(entity instanceof RuneTableBlockEntity) {
@@ -47,8 +50,15 @@ public class RuneTable extends BaseEntityBlock {
             } else {
                 throw new IllegalStateException("Hey you idiot, the Container is freaking missing!");
             }
+            }
+        CompoundTag playerData = pPlayer.getPersistentData();
+        CompoundTag persistentData = playerData.getCompound(LEARNED_SPELLS_KEY);
+        if (persistentData.contains("Levitation Blast")){
+            HasLevitationBlastspell = true;
         }
-
+        if (persistentData.contains("Summon Demised")){
+            HasSummonDemisedSpell = true;
+        }
         return InteractionResult.sidedSuccess(pLevel.isClientSide());
     }
     @Nullable
