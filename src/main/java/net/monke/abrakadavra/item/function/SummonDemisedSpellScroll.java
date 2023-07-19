@@ -38,11 +38,11 @@ public class SummonDemisedSpellScroll extends Item {
         else {
             if (needtolearn) {
                 pPlayer.displayClientMessage(new TextComponent("You have just learnt a Summon Demised Spell!"), true);
-                pPlayer.playSound(SoundEvents.BOOK_PAGE_TURN, 100.0F, 100.0F);
+                pPlayer.playSound(SoundEvents.BOOK_PAGE_TURN, 1.0F, 1.0F);
             }
             else {
                 pPlayer.displayClientMessage(new TextComponent("You already know the Summon Demised Spell!"), true);
-                pPlayer.playSound(SoundEvents.BOOK_PAGE_TURN, 100.0F, 100.0F);
+                pPlayer.playSound(SoundEvents.BOOK_PAGE_TURN, 1.0F, 1.0F);
             }
         }
         return super.use(pLevel, pPlayer, pUsedHand);

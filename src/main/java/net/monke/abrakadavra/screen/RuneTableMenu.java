@@ -17,11 +17,12 @@ import net.monke.abrakadavra.screen.slot.WandSlot;
 
 public class RuneTableMenu extends AbstractContainerMenu {
     private final RuneTableBlockEntity blockEntity;
-    private final Level level;
 
+    private final Level level;
     public RuneTableMenu(int windowId, Inventory inv, FriendlyByteBuf extraData) {
         this(windowId, inv, inv.player.level.getBlockEntity(extraData.readBlockPos()));
     }
+
     public RuneTableMenu(int windowId, Inventory inv, BlockEntity entity) {
         super(ModMenuTypes.RUNE_TABLE_MENU.get(), windowId);
         checkContainerSize(inv, 1);
@@ -55,7 +56,6 @@ public class RuneTableMenu extends AbstractContainerMenu {
     private static final int TE_INVENTORY_FIRST_SLOT_INDEX = VANILLA_FIRST_SLOT_INDEX + VANILLA_SLOT_COUNT;
     // THIS YOU HAVE TO DEFINE!
     private static final int TE_INVENTORY_SLOT_COUNT = 4;  // must be the number of slots you have!
-
     @Override
     public ItemStack quickMoveStack(Player playerIn, int index) {
         Slot sourceSlot = slots.get(index);
