@@ -4,9 +4,7 @@ import com.mojang.blaze3d.systems.RenderSystem;
 import com.mojang.blaze3d.vertex.PoseStack;
 import net.minecraft.client.Minecraft;
 import net.minecraft.client.gui.components.toasts.SystemToast;
-import net.minecraft.network.chat.TextComponent;
 import net.minecraft.network.chat.TranslatableComponent;
-import net.minecraft.sounds.SoundEvents;
 import net.minecraft.world.inventory.ClickType;
 import net.minecraft.world.inventory.Slot;
 import net.minecraft.world.item.ItemStack;
@@ -30,6 +28,7 @@ public class RuneTableScreen extends AbstractContainerScreen<RuneTableMenu> {
         this.runeTableMenu = pMenu;
     }
     private RuneTableMenu runeTableMenu;
+
     @Override
     protected void init() {
         super.init();
@@ -61,35 +60,45 @@ public class RuneTableScreen extends AbstractContainerScreen<RuneTableMenu> {
     }
     @Override
     protected void slotClicked(Slot pSlot, int pSlotId, int pMouseButton, ClickType pType) {
-        super.slotClicked(pSlot, pSlotId, pMouseButton, pType);
-
         // Check if the clicked slot is a spell slot and the wand is present in the WandSlot
-        if (pSlot instanceof SpellSlot && pMouseButton == 0 && runeTableMenu.getSlot(0).hasItem()) {
-            ItemStack wandStack = runeTableMenu.getSlot(0).getItem();
+        if (pSlot instanceof SpellSlot && pMouseButton == 0 && runeTableMenu.getSlot(36).hasItem()) {
+            ItemStack wandStack = runeTableMenu.getSlot(36).getItem();
             String spellName = "";
-
             // Determine the spell name based on the slotId
             switch (pSlotId) {
-                case 1:
+                case 37:
                     spellName = "Ice Bolt";
+                    Minecraft.getInstance().getToasts().addToast(new SystemToast(SystemToast.SystemToastIds.TUTORIAL_HINT,
+                            new TranslatableComponent("Ice Bolt was infused!"), new TranslatableComponent("")));
+                    Wand.setSpellAssignedToWand(wandStack, spellName);
                     break;
-                case 2:
-                    spellName = "Levitation Blast";
+                case 38:
+                    if (RuneTable.HasLevitationBlastspell) {
+                        spellName = "Levitation Blast";
+                        Minecraft.getInstance().getToasts().addToast(new SystemToast(SystemToast.SystemToastIds.TUTORIAL_HINT,
+                                new TranslatableComponent("Levitation Blast was infused!"), new TranslatableComponent("")));
+                        Wand.setSpellAssignedToWand(wandStack, spellName);
+                    } else {
+                    Minecraft.getInstance().getToasts().addToast(new SystemToast(SystemToast.SystemToastIds.TUTORIAL_HINT,
+                            new TranslatableComponent("You don't know that spell!"), new TranslatableComponent(""))); }
                     break;
-                case 3:
-                    spellName = "Necromancery";
+                case 39:
+                    if (RuneTable.HasSummonDemisedSpell) {
+                        spellName = "Necromancery";
+                        Minecraft.getInstance().getToasts().addToast(new SystemToast(SystemToast.SystemToastIds.TUTORIAL_HINT,
+                                new TranslatableComponent("Necromancery was infused!"), new TranslatableComponent("")));
+                        Wand.setSpellAssignedToWand(wandStack, spellName);
+                    } else {
+                    Minecraft.getInstance().getToasts().addToast(new SystemToast(SystemToast.SystemToastIds.TUTORIAL_HINT,
+                            new TranslatableComponent("You don't know that spell!"), new TranslatableComponent(""))); }
                     break;
                 // Add more cases for other slots if needed
             }
             // Insert the spell name into the wand's NBT data
-            Wand.setSpellAssignedToWand(wandStack, spellName);
             // Play a sound or show a particle effect if desired
-            // For example:
             // pPlayer.playSound(SoundEvents.ITEM_BOOK_PAGE_TURN, 1.0F, 1.0F);
-            Minecraft.getInstance().getToasts().addToast(new SystemToast(SystemToast.SystemToastIds.TUTORIAL_HINT,
-                    new TranslatableComponent("The Wand has just been infused by the spell!"), new TranslatableComponent("")));
-
             // Update the screen to refresh the tooltip with the new spell
         }
+        super.slotClicked(pSlot, pSlotId, pMouseButton, pType);
     }
 }

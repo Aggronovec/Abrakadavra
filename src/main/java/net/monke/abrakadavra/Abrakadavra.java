@@ -20,10 +20,8 @@ import org.apache.logging.log4j.Logger;
 public class Abrakadavra
 {
     public static final String MOD_ID = "abrakadavra";
-
     // Directly reference a log4j logger.
     private static final Logger LOGGER = LogManager.getLogger();
-
     public Abrakadavra() {
         // Register the setup method for modloading
         IEventBus eventBus = FMLJavaModLoadingContext.get().getModEventBus();
@@ -44,12 +42,10 @@ public class Abrakadavra
         {
         MenuScreens.register(ModMenuTypes.RUNE_TABLE_MENU.get(), RuneTableScreen::new);
     }
-
     private void setup(final FMLCommonSetupEvent event)
     {
         // some preinit code
         LOGGER.info("HELLO FROM PREINIT");
         LOGGER.info("DIRT BLOCK >> {}", Blocks.DIRT.getRegistryName());
-
     }
 }

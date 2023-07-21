@@ -3,6 +3,7 @@ package net.monke.abrakadavra.item.function;
 import net.minecraft.Util;
 import net.minecraft.nbt.CompoundTag;
 import net.minecraft.network.chat.TextComponent;
+import net.minecraft.network.chat.TranslatableComponent;
 import net.minecraft.sounds.SoundEvents;
 import net.minecraft.world.InteractionHand;
 import net.minecraft.world.InteractionResultHolder;
@@ -37,11 +38,11 @@ public class SummonDemisedSpellScroll extends Item {
         }
         else {
             if (needtolearn) {
-                pPlayer.displayClientMessage(new TextComponent("You have just learnt a Summon Demised Spell!"), true);
+                pPlayer.displayClientMessage(new TranslatableComponent("You have just learnt a Summon Demised Spell!"), true);
                 pPlayer.playSound(SoundEvents.BOOK_PAGE_TURN, 1.0F, 1.0F);
             }
             else {
-                pPlayer.displayClientMessage(new TextComponent("You already know the Summon Demised Spell!"), true);
+                pPlayer.displayClientMessage(new TranslatableComponent("You already know the Summon Demised Spell!"), true);
                 pPlayer.playSound(SoundEvents.BOOK_PAGE_TURN, 1.0F, 1.0F);
             }
         }

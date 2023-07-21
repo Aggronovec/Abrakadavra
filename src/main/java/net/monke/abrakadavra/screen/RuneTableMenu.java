@@ -4,6 +4,7 @@ import net.minecraft.network.FriendlyByteBuf;
 import net.minecraft.world.entity.player.Inventory;
 import net.minecraft.world.entity.player.Player;
 import net.minecraft.world.inventory.AbstractContainerMenu;
+import net.minecraft.world.inventory.ClickType;
 import net.minecraft.world.inventory.ContainerLevelAccess;
 import net.minecraft.world.inventory.Slot;
 import net.minecraft.world.item.ItemStack;
@@ -25,7 +26,7 @@ public class RuneTableMenu extends AbstractContainerMenu {
 
     public RuneTableMenu(int windowId, Inventory inv, BlockEntity entity) {
         super(ModMenuTypes.RUNE_TABLE_MENU.get(), windowId);
-        checkContainerSize(inv, 1);
+        checkContainerSize(inv, 4);
         blockEntity = ((RuneTableBlockEntity) entity);
         this.level = inv.player.level;
 
@@ -33,7 +34,6 @@ public class RuneTableMenu extends AbstractContainerMenu {
         addPlayerHotbar(inv);
 
         this.blockEntity.getCapability(CapabilityItemHandler.ITEM_HANDLER_CAPABILITY).ifPresent(handler -> {
-//            this.addSlot(new ModFuelSlot(handler, 0, 18, 50));
             this.addSlot(new WandSlot(handler, 0, 80, 45));
             this.addSlot(new SpellSlot(handler, 1, 176, 90));
             this.addSlot(new SpellSlot(handler, 2, 191, 90));
@@ -105,4 +105,5 @@ public class RuneTableMenu extends AbstractContainerMenu {
             this.addSlot(new Slot(playerInventory, i, 8 + i * 18, 144));
         }
     }
+
 }

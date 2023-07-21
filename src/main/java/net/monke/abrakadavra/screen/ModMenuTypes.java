@@ -13,16 +13,12 @@ import net.minecraftforge.registries.RegistryObject;
 public class ModMenuTypes {
     public static final DeferredRegister<MenuType<?>> MENUS =
             DeferredRegister.create(ForgeRegistries.CONTAINERS, Abrakadavra.MOD_ID);
-
     public static final RegistryObject<MenuType<RuneTableMenu>> RUNE_TABLE_MENU =
             registerMenuType(RuneTableMenu::new, "rune_table_menu");
-
-
     private static <T extends AbstractContainerMenu> RegistryObject<MenuType<T>> registerMenuType(IContainerFactory<T> factory,
                                                                                                   String name) {
         return MENUS.register(name, () -> IForgeMenuType.create(factory));
     }
-
     public static void register(IEventBus eventBus) {
         MENUS.register(eventBus);
     }
