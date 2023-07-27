@@ -19,19 +19,34 @@ import net.monke.abrakadavra.item.function.Wand;
 import net.monke.abrakadavra.screen.slot.SpellSlot;
 
 public class RuneTableScreen extends AbstractContainerScreen<RuneTableMenu> {
-
-    private static final ResourceLocation TEXTURE =
-            new ResourceLocation(Abrakadavra.MOD_ID, "textures/gui/rune_table_gui.png");
-//    public String LEARNED_SPELLS_KEY = "LearnedSpells";
+    private static final ResourceLocation TEXTURE = new ResourceLocation(Abrakadavra.MOD_ID, "textures/gui/rune_table_gui.png");
     public RuneTableScreen(RuneTableMenu pMenu, Inventory pPlayerInventory, Component pTitle) {
         super(pMenu, pPlayerInventory, pTitle);
-        this.runeTableMenu = pMenu;
-    }
+        this.runeTableMenu = pMenu; }
+    private int selectedSlot = 37;
     private RuneTableMenu runeTableMenu;
-
     @Override
     protected void init() {
         super.init();
+    }
+    private void setTexture(ResourceLocation texture) {
+        RenderSystem.setShader(GameRenderer::getPositionTexShader);
+        RenderSystem.setShaderColor(1.0F, 1.0F, 1.0F, 1.0F);
+        RenderSystem.setShaderTexture(0, texture);
+    }
+    private void renderSlotHighlight(PoseStack pPoseStack, int x, int y) {
+        if (selectedSlot >= 37 && selectedSlot <= 39) {
+            // Check if the selected slot is within the spell slot range and matches the current y position
+            // You can modify the x and y positions as needed to adjust the highlight position
+            // For example, x + 205, y + 88 is the position of the first slot
+            // Each slot is 18 pixels apart in the y-axis, so we use (y - 88) / 18 to calculate the slot index
+            // Here, we assume the first slot is index 0, second slot index 1, and so on.
+            // Render the highlight texture here, you can use blit or any other method as needed
+            // For example, to draw a red rectangle highlight, you can use:
+            setTexture(new ResourceLocation(Abrakadavra.MOD_ID, "textures/gui/rune_table_gui.png"));
+            this.blit(pPoseStack, x - 1, y - 1, 32, 169, 20, 20);
+//            fill(pPoseStack, x - 1, y - 1, x + 18, y + 18, 0xFFFF0000); // Red color (Alpha, Red, Green, Blue)
+        }
     }
 
     @Override
@@ -44,12 +59,32 @@ public class RuneTableScreen extends AbstractContainerScreen<RuneTableMenu> {
 
         this.blit(pPoseStack, x + 27, y, 0, 0, 230, imageHeight);
 
-        this.blit(pPoseStack, x + 204, y + 91, 1, 167, 13, 13); // Glowing of Ice spell
-        if (RuneTable.HasLevitationBlastspell) {
-            this.blit(pPoseStack, x + 219, y + 91, 15, 167, 13, 13); // Glowing of Levitation spell
+        renderSlotHighlight(pPoseStack, x + 205, y + 88 + 18 * 0); // First slot
+        renderSlotHighlight(pPoseStack, x + 205, y + 88 + 18 * 1); // Second slot
+        renderSlotHighlight(pPoseStack, x + 205, y + 88 + 18 * 2); // Third slot
+
+        if (RuneTable.HasIceBoltSpell) {
+            setTexture(new ResourceLocation(Abrakadavra.MOD_ID, "textures/gui/spell_icons/ice_bolt.png"));
+            this.blit(pPoseStack, x + 205, y + 88, 0, 0, 16, 16, 16, 16);
+        } else {
+            setTexture(new ResourceLocation(Abrakadavra.MOD_ID, "textures/gui/spell_icons/ice_bolt_locked.png"));
+            this.blit(pPoseStack, x + 205, y + 88, 0, 0, 16, 16, 16, 16);
         }
+
+        if (RuneTable.HasLevitationBlastspell) {
+            setTexture(new ResourceLocation(Abrakadavra.MOD_ID, "textures/gui/spell_icons/levitation_blast.png"));
+            this.blit(pPoseStack, x + 205, y + 106, 0, 0, 16, 16, 16, 16);
+        } else {
+            setTexture(new ResourceLocation(Abrakadavra.MOD_ID, "textures/gui/spell_icons/levitation_blast_locked.png"));
+            this.blit(pPoseStack, x + 205, y + 106, 0, 0, 16, 16, 16, 16);
+        }
+
         if (RuneTable.HasSummonDemisedSpell) {
-            this.blit(pPoseStack, x + 234, y + 91, 29, 167, 13, 13); // Glowing of Necromancery spell
+            setTexture(new ResourceLocation(Abrakadavra.MOD_ID, "textures/gui/spell_icons/summon_demised.png"));
+            this.blit(pPoseStack, x + 205, y + 124, 0, 0, 16, 16, 16, 16);
+        } else {
+            setTexture(new ResourceLocation(Abrakadavra.MOD_ID, "textures/gui/spell_icons/summon_demised_locked.png"));
+            this.blit(pPoseStack, x + 205, y + 124, 0, 0, 16, 16, 16, 16);
         }
     }
     @Override
@@ -58,46 +93,57 @@ public class RuneTableScreen extends AbstractContainerScreen<RuneTableMenu> {
         super.render(pPoseStack, mouseX, mouseY, delta);
         renderTooltip(pPoseStack, mouseX, mouseY);
     }
+
     @Override
-    protected void slotClicked(Slot pSlot, int pSlotId, int pMouseButton, ClickType pType) {
+    public void onClose() {
+        ItemStack wandStack = runeTableMenu.getSlot(0).getItem();
+        Wand.setSpellAssignedToWand(wandStack, "HEUREKA");
+        super.onClose();
+    }
+
+    @Override
+    public void slotClicked(Slot pSlot, int pSlotId, int pMouseButton, ClickType pType) {
         // Check if the clicked slot is a spell slot and the wand is present in the WandSlot
         if (pSlot instanceof SpellSlot && pMouseButton == 0 && runeTableMenu.getSlot(36).hasItem()) {
             ItemStack wandStack = runeTableMenu.getSlot(36).getItem();
-            String spellName = "";
             // Determine the spell name based on the slotId
             switch (pSlotId) {
                 case 37:
-                    spellName = "Ice Bolt";
-                    Minecraft.getInstance().getToasts().addToast(new SystemToast(SystemToast.SystemToastIds.TUTORIAL_HINT,
-                            new TranslatableComponent("Ice Bolt was infused!"), new TranslatableComponent("")));
-                    Wand.setSpellAssignedToWand(wandStack, spellName);
+                    if (RuneTable.HasIceBoltSpell) {
+                        Minecraft.getInstance().getToasts().addToast(new SystemToast(SystemToast.SystemToastIds.TUTORIAL_HINT,
+                                new TranslatableComponent("Ice Bolt was infused!"), new TranslatableComponent("")));
+                        Wand.setSpellAssignedToWand(wandStack, "Ice Bolt");
+                        selectedSlot = pSlotId;
+                    } else {
+                        Minecraft.getInstance().getToasts().addToast(new SystemToast(SystemToast.SystemToastIds.TUTORIAL_HINT,
+                                new TranslatableComponent("You don't know that spell!"), new TranslatableComponent(""))); }
                     break;
                 case 38:
                     if (RuneTable.HasLevitationBlastspell) {
-                        spellName = "Levitation Blast";
                         Minecraft.getInstance().getToasts().addToast(new SystemToast(SystemToast.SystemToastIds.TUTORIAL_HINT,
                                 new TranslatableComponent("Levitation Blast was infused!"), new TranslatableComponent("")));
-                        Wand.setSpellAssignedToWand(wandStack, spellName);
+                        Wand.setSpellAssignedToWand(wandStack, "Levitation Blast");
+                        selectedSlot = pSlotId;
                     } else {
                     Minecraft.getInstance().getToasts().addToast(new SystemToast(SystemToast.SystemToastIds.TUTORIAL_HINT,
                             new TranslatableComponent("You don't know that spell!"), new TranslatableComponent(""))); }
                     break;
                 case 39:
                     if (RuneTable.HasSummonDemisedSpell) {
-                        spellName = "Necromancery";
                         Minecraft.getInstance().getToasts().addToast(new SystemToast(SystemToast.SystemToastIds.TUTORIAL_HINT,
                                 new TranslatableComponent("Necromancery was infused!"), new TranslatableComponent("")));
-                        Wand.setSpellAssignedToWand(wandStack, spellName);
+                        Wand.setSpellAssignedToWand(wandStack, "Necromancery");
+                        selectedSlot = pSlotId;
                     } else {
                     Minecraft.getInstance().getToasts().addToast(new SystemToast(SystemToast.SystemToastIds.TUTORIAL_HINT,
                             new TranslatableComponent("You don't know that spell!"), new TranslatableComponent(""))); }
                     break;
                 // Add more cases for other slots if needed
             }
-            // Insert the spell name into the wand's NBT data
             // Play a sound or show a particle effect if desired
             // pPlayer.playSound(SoundEvents.ITEM_BOOK_PAGE_TURN, 1.0F, 1.0F);
-            // Update the screen to refresh the tooltip with the new spell
+
+            init(); // refreshing the screen by calling init() again
         }
         super.slotClicked(pSlot, pSlotId, pMouseButton, pType);
     }

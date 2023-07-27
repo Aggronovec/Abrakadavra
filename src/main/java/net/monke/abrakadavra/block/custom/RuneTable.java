@@ -6,6 +6,7 @@ import net.minecraft.server.level.ServerPlayer;
 import net.minecraft.world.InteractionHand;
 import net.minecraft.world.InteractionResult;
 import net.minecraft.world.entity.player.Player;
+import net.minecraft.world.item.ItemStack;
 import net.minecraft.world.level.Level;
 import net.minecraft.world.level.block.BaseEntityBlock;
 import net.minecraft.world.level.block.RenderShape;
@@ -17,6 +18,8 @@ import net.minecraft.world.phys.BlockHitResult;
 import net.minecraftforge.network.NetworkHooks;
 import net.monke.abrakadavra.block.entity.ModBlockEntities;
 import net.monke.abrakadavra.block.entity.RuneTableBlockEntity;
+import net.monke.abrakadavra.item.function.Wand;
+import net.monke.abrakadavra.screen.RuneTableScreen;
 import org.jetbrains.annotations.Nullable;
 
 import static net.monke.abrakadavra.item.function.LevitationBlastSpellScroll.LEARNED_SPELLS_KEY;
@@ -28,6 +31,7 @@ public class RuneTable extends BaseEntityBlock {
     }
     public static boolean HasLevitationBlastspell = false;
     public static boolean HasSummonDemisedSpell = false;
+    public static boolean HasIceBoltSpell = false;
     @Override
     public RenderShape getRenderShape(BlockState pState) {
         return RenderShape.MODEL;
@@ -53,6 +57,9 @@ public class RuneTable extends BaseEntityBlock {
             }
         CompoundTag playerData = pPlayer.getPersistentData();
         CompoundTag persistentData = playerData.getCompound(LEARNED_SPELLS_KEY);
+        if (persistentData.contains("Ice Bolt")) {
+            HasIceBoltSpell = true;
+        }
         if (persistentData.contains("Levitation Blast")){
             HasLevitationBlastspell = true;
         }

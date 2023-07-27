@@ -35,9 +35,9 @@ public class RuneTableMenu extends AbstractContainerMenu {
 
         this.blockEntity.getCapability(CapabilityItemHandler.ITEM_HANDLER_CAPABILITY).ifPresent(handler -> {
             this.addSlot(new WandSlot(handler, 0, 80, 45));
-            this.addSlot(new SpellSlot(handler, 1, 176, 90));
-            this.addSlot(new SpellSlot(handler, 2, 191, 90));
-            this.addSlot(new SpellSlot(handler, 3, 206, 90));
+            this.addSlot(new SpellSlot(handler, 1, 178, 88));
+            this.addSlot(new SpellSlot(handler, 2, 178, 106));
+            this.addSlot(new SpellSlot(handler, 3, 178, 124));
         });
     }
     // CREDIT GOES TO: diesieben07 | https://github.com/diesieben07/SevenCommons

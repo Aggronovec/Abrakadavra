@@ -24,6 +24,7 @@ public class LevitationBlastSpellScroll extends Item {
     public InteractionResultHolder<ItemStack> use(Level pLevel, Player pPlayer, InteractionHand pUsedHand) {
 //        if(pPlayer.getLevel().isClientSide()) {
         if (!pLevel.isClientSide()) {
+
             learnSpell(pPlayer, "Levitation Blast");
             pPlayer.getInventory().removeItem(pPlayer.getItemInHand(pUsedHand));
 //            knowsLevitationBlast = true;
@@ -31,7 +32,6 @@ public class LevitationBlastSpellScroll extends Item {
         else {
             if (needtolearn) {
                 pPlayer.displayClientMessage(new TranslatableComponent("You have just learnt a Levitation Blast!"), true);
-
                 pPlayer.playSound(SoundEvents.BOOK_PAGE_TURN, 1.0F, 1.0F);
             }
             else {
