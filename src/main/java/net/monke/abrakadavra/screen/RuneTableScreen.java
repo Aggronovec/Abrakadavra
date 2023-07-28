@@ -44,7 +44,7 @@ public class RuneTableScreen extends AbstractContainerScreen<RuneTableMenu> {
             // Render the highlight texture here, you can use blit or any other method as needed
             // For example, to draw a red rectangle highlight, you can use:
             setTexture(new ResourceLocation(Abrakadavra.MOD_ID, "textures/gui/rune_table_gui.png"));
-            this.blit(pPoseStack, x - 1, y - 1, 32, 169, 20, 20);
+            this.blit(pPoseStack, x - 2, y - 2, 32, 169, 20, 20);
 //            fill(pPoseStack, x - 1, y - 1, x + 18, y + 18, 0xFFFF0000); // Red color (Alpha, Red, Green, Blue)
         }
     }
@@ -59,9 +59,16 @@ public class RuneTableScreen extends AbstractContainerScreen<RuneTableMenu> {
 
         this.blit(pPoseStack, x + 27, y, 0, 0, 230, imageHeight);
 
-        renderSlotHighlight(pPoseStack, x + 205, y + 88 + 18 * 0); // First slot
-        renderSlotHighlight(pPoseStack, x + 205, y + 88 + 18 * 1); // Second slot
-        renderSlotHighlight(pPoseStack, x + 205, y + 88 + 18 * 2); // Third slot
+        switch (selectedSlot) { // method to render the slot highlight for the particular slot
+            case 37:
+                renderSlotHighlight(pPoseStack, x + 205, y + 88 + 19 * 0); // First slot
+                break;
+            case 38:
+                renderSlotHighlight(pPoseStack, x + 205, y + 88 + 19 * 1); // Second slot
+                break;
+            case 39:
+                renderSlotHighlight(pPoseStack, x + 205, y + 88 + 19 * 2); // Third slot
+                break; }
 
         if (RuneTable.HasIceBoltSpell) {
             setTexture(new ResourceLocation(Abrakadavra.MOD_ID, "textures/gui/spell_icons/ice_bolt.png"));
@@ -73,18 +80,18 @@ public class RuneTableScreen extends AbstractContainerScreen<RuneTableMenu> {
 
         if (RuneTable.HasLevitationBlastspell) {
             setTexture(new ResourceLocation(Abrakadavra.MOD_ID, "textures/gui/spell_icons/levitation_blast.png"));
-            this.blit(pPoseStack, x + 205, y + 106, 0, 0, 16, 16, 16, 16);
+            this.blit(pPoseStack, x + 205, y + 107, 0, 0, 16, 16, 16, 16);
         } else {
             setTexture(new ResourceLocation(Abrakadavra.MOD_ID, "textures/gui/spell_icons/levitation_blast_locked.png"));
-            this.blit(pPoseStack, x + 205, y + 106, 0, 0, 16, 16, 16, 16);
+            this.blit(pPoseStack, x + 205, y + 107, 0, 0, 16, 16, 16, 16);
         }
 
         if (RuneTable.HasSummonDemisedSpell) {
             setTexture(new ResourceLocation(Abrakadavra.MOD_ID, "textures/gui/spell_icons/summon_demised.png"));
-            this.blit(pPoseStack, x + 205, y + 124, 0, 0, 16, 16, 16, 16);
+            this.blit(pPoseStack, x + 205, y + 126, 0, 0, 16, 16, 16, 16);
         } else {
             setTexture(new ResourceLocation(Abrakadavra.MOD_ID, "textures/gui/spell_icons/summon_demised_locked.png"));
-            this.blit(pPoseStack, x + 205, y + 124, 0, 0, 16, 16, 16, 16);
+            this.blit(pPoseStack, x + 205, y + 126, 0, 0, 16, 16, 16, 16);
         }
     }
     @Override
