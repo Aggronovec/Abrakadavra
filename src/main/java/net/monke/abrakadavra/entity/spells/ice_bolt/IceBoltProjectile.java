@@ -14,11 +14,6 @@ import static java.nio.file.Files.setOwner;
 
 public class IceBoltProjectile extends AbstractSpellProjectile {
 
-
-    public IceBoltProjectile(EntityType<? extends Projectile> pEntityType, Level pLevel) {
-        super(pEntityType, pLevel);
-    }
-
     @Override
     public void trailParticles() {
 
