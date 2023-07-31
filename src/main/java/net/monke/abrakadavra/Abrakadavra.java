@@ -1,6 +1,7 @@
 package net.monke.abrakadavra;
 
 import net.minecraft.client.gui.screens.MenuScreens;
+import net.monke.abrakadavra.entity.EntityTypes;
 import net.minecraft.resources.ResourceLocation;
 import net.minecraft.world.level.block.Blocks;
 import net.minecraftforge.common.MinecraftForge;
@@ -43,6 +44,8 @@ public class Abrakadavra
 
         ModBlockEntities.register(eventBus);
         ModMenuTypes.register(eventBus);
+
+        EntityTypes.ENTITY_TYPES.register(eventBus);
 
         eventBus.addListener(this::setup);
         eventBus.addListener(this::clientSetup);
