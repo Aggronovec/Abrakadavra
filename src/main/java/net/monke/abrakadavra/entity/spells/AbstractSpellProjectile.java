@@ -36,14 +36,6 @@ public abstract class AbstractSpellProjectile {
 
     public abstract Optional<SoundEvent> getImpactSound();
 
-    public AbstractSpellProjectile(EntityType<? extends Projectile> pEntityType, Level pLevel) {
-        super(pEntityType, pLevel);
-    }
-
-    public void shoot(Vec3 rotation) {
-        setDeltaMovement(rotation.scale(getSpeed()));
-    }
-
     public void setDamage(float damage) {
         this.damage = damage;
     }
@@ -64,50 +56,6 @@ public abstract class AbstractSpellProjectile {
         return false;
     }
 
-    @Override
-    protected void onHit(HitResult hitresult) {
-//        if (hitresult instanceof EntityHitResult entityHitResult)
-//            if (entityHitResult.getEntity().getType() == EntityType.ENDERMAN || (entityHitResult.getEntity() instanceof LivingEntity livingEntity && PlayerMagicData.getPlayerMagicData(livingEntity).getSyncedData().hasDodgeEffect()))
-//                return;
-        super.onHit(hitresult);
-        double x = xOld;
-        double y = yOld;
-        double z = zOld;
 
-        if (!level.isClientSide) {
-            impactParticles(x, y, z);
-            getImpactSound().ifPresent(this::doImpactSound);
-        }
-    }
-
-    protected void doImpactSound(SoundEvent sound) {
-        level.playSound(null, getX(), getY(), getZ(), sound, SoundSource.NEUTRAL, 2, .9f + level.random.nextFloat() * .2f);
-    }
-
-    @Override
-    protected void defineSynchedData() {
-
-    }
-    @Override
-    protected void addAdditionalSaveData(CompoundTag pCompound) {
-        super.addAdditionalSaveData(pCompound);
-        pCompound.putFloat("Damage", this.getDamage());
-        pCompound.putFloat("ExplosionRadius", explosionRadius);
-
-
-    }
-
-    @Override
-    protected void readAdditionalSaveData(CompoundTag pCompound) {
-        super.readAdditionalSaveData(pCompound);
-        this.damage = pCompound.getFloat("Damage");
-        this.explosionRadius = pCompound.getFloat("ExplosionRadius");
-
-    }
-
-    @Override
-    public boolean isOnFire() {
-        return false;
-    }
 
 }
