@@ -15,8 +15,10 @@ import net.minecraft.network.chat.Component;
 import net.minecraft.resources.ResourceLocation;
 import net.minecraft.world.entity.player.Inventory;
 import net.monke.abrakadavra.block.custom.RuneTable;
+import net.monke.abrakadavra.item.ModItems;
 import net.monke.abrakadavra.item.function.Wand;
 import net.monke.abrakadavra.screen.slot.SpellSlot;
+import net.monke.abrakadavra.screen.slot.WandSlot;
 
 public class RuneTableScreen extends AbstractContainerScreen<RuneTableMenu> {
     private static final ResourceLocation TEXTURE = new ResourceLocation(Abrakadavra.MOD_ID, "textures/gui/rune_table_gui.png");
@@ -24,6 +26,7 @@ public class RuneTableScreen extends AbstractContainerScreen<RuneTableMenu> {
         super(pMenu, pPlayerInventory, pTitle);
         this.runeTableMenu = pMenu; }
     private int selectedSlot = 37;
+    public static ItemStack newWandStack;
     private RuneTableMenu runeTableMenu;
     @Override
     protected void init() {
@@ -38,11 +41,8 @@ public class RuneTableScreen extends AbstractContainerScreen<RuneTableMenu> {
         if (selectedSlot >= 37 && selectedSlot <= 39) {
             // Check if the selected slot is within the spell slot range and matches the current y position
             // You can modify the x and y positions as needed to adjust the highlight position
-            // For example, x + 205, y + 88 is the position of the first slot
-            // Each slot is 18 pixels apart in the y-axis, so we use (y - 88) / 18 to calculate the slot index
             // Here, we assume the first slot is index 0, second slot index 1, and so on.
             // Render the highlight texture here, you can use blit or any other method as needed
-            // For example, to draw a red rectangle highlight, you can use:
             setTexture(new ResourceLocation(Abrakadavra.MOD_ID, "textures/gui/rune_table_gui.png"));
             this.blit(pPoseStack, x - 2, y - 2, 32, 169, 20, 20);
 //            fill(pPoseStack, x - 1, y - 1, x + 18, y + 18, 0xFFFF0000); // Red color (Alpha, Red, Green, Blue)
@@ -121,6 +121,8 @@ public class RuneTableScreen extends AbstractContainerScreen<RuneTableMenu> {
                                 new TranslatableComponent("Ice Bolt was infused!"), new TranslatableComponent("")));
                         Wand.setSpellAssignedToWand(wandStack, "Ice Bolt");
                         selectedSlot = pSlotId;
+                        ItemStack newWandStack = new ItemStack(ModItems.WAND_ICE_BOLT.get());
+                        runeTableMenu.getSlot(36).set(newWandStack);
                     } else {
                         Minecraft.getInstance().getToasts().addToast(new SystemToast(SystemToast.SystemToastIds.TUTORIAL_HINT,
                                 new TranslatableComponent("You don't know that spell!"), new TranslatableComponent(""))); }
@@ -131,6 +133,8 @@ public class RuneTableScreen extends AbstractContainerScreen<RuneTableMenu> {
                                 new TranslatableComponent("Levitation Blast was infused!"), new TranslatableComponent("")));
                         Wand.setSpellAssignedToWand(wandStack, "Levitation Blast");
                         selectedSlot = pSlotId;
+                        ItemStack newWand = new ItemStack(ModItems.WAND_LEVITATION_BLAST.get());
+                        ((WandSlot) runeTableMenu.getSlot(36)).swapWand(newWand);
                     } else {
                     Minecraft.getInstance().getToasts().addToast(new SystemToast(SystemToast.SystemToastIds.TUTORIAL_HINT,
                             new TranslatableComponent("You don't know that spell!"), new TranslatableComponent(""))); }
@@ -141,6 +145,9 @@ public class RuneTableScreen extends AbstractContainerScreen<RuneTableMenu> {
                                 new TranslatableComponent("Necromancery was infused!"), new TranslatableComponent("")));
                         Wand.setSpellAssignedToWand(wandStack, "Necromancery");
                         selectedSlot = pSlotId;
+                        newWandStack = new ItemStack(ModItems.WAND_SUMMON_DEMISED.get());
+                        runeTableMenu.getSlot(36).set(newWandStack);
+
                     } else {
                     Minecraft.getInstance().getToasts().addToast(new SystemToast(SystemToast.SystemToastIds.TUTORIAL_HINT,
                             new TranslatableComponent("You don't know that spell!"), new TranslatableComponent(""))); }
@@ -149,7 +156,6 @@ public class RuneTableScreen extends AbstractContainerScreen<RuneTableMenu> {
             }
             // Play a sound or show a particle effect if desired
             // pPlayer.playSound(SoundEvents.ITEM_BOOK_PAGE_TURN, 1.0F, 1.0F);
-
             init(); // refreshing the screen by calling init() again
         }
         super.slotClicked(pSlot, pSlotId, pMouseButton, pType);
