@@ -106,4 +106,5 @@ public class RuneTableMenu extends AbstractContainerMenu {
         }
     }
 
+
 }

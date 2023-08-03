@@ -17,8 +17,13 @@ import net.minecraft.world.entity.player.Inventory;
 import net.monke.abrakadavra.block.custom.RuneTable;
 import net.monke.abrakadavra.item.ModItems;
 import net.monke.abrakadavra.item.function.Wand;
+import net.monke.abrakadavra.networking.ModMessages;
+import net.monke.abrakadavra.networking.packet.C2SPacket;
+import net.monke.abrakadavra.networking.packet.IceBoltPacket;
+import net.monke.abrakadavra.networking.packet.LevitationPacket;
+import net.monke.abrakadavra.networking.packet.SummonDemisedPacket;
 import net.monke.abrakadavra.screen.slot.SpellSlot;
-import net.monke.abrakadavra.screen.slot.WandSlot;
+
 
 public class RuneTableScreen extends AbstractContainerScreen<RuneTableMenu> {
     private static final ResourceLocation TEXTURE = new ResourceLocation(Abrakadavra.MOD_ID, "textures/gui/rune_table_gui.png");
@@ -48,7 +53,6 @@ public class RuneTableScreen extends AbstractContainerScreen<RuneTableMenu> {
 //            fill(pPoseStack, x - 1, y - 1, x + 18, y + 18, 0xFFFF0000); // Red color (Alpha, Red, Green, Blue)
         }
     }
-
     @Override
     protected void renderBg(PoseStack pPoseStack, float pPartialTicks, int pMouseX, int pMouseY) {
         RenderSystem.setShader(GameRenderer::getPositionTexShader);
@@ -102,13 +106,6 @@ public class RuneTableScreen extends AbstractContainerScreen<RuneTableMenu> {
     }
 
     @Override
-    public void onClose() {
-        ItemStack wandStack = runeTableMenu.getSlot(0).getItem();
-        Wand.setSpellAssignedToWand(wandStack, "HEUREKA");
-        super.onClose();
-    }
-
-    @Override
     public void slotClicked(Slot pSlot, int pSlotId, int pMouseButton, ClickType pType) {
         // Check if the clicked slot is a spell slot and the wand is present in the WandSlot
         if (pSlot instanceof SpellSlot && pMouseButton == 0 && runeTableMenu.getSlot(36).hasItem()) {
@@ -121,8 +118,7 @@ public class RuneTableScreen extends AbstractContainerScreen<RuneTableMenu> {
                                 new TranslatableComponent("Ice Bolt was infused!"), new TranslatableComponent("")));
                         Wand.setSpellAssignedToWand(wandStack, "Ice Bolt");
                         selectedSlot = pSlotId;
-                        ItemStack newWandStack = new ItemStack(ModItems.WAND_ICE_BOLT.get());
-                        runeTableMenu.getSlot(36).set(newWandStack);
+                        ModMessages.sendToServer(new IceBoltPacket());
                     } else {
                         Minecraft.getInstance().getToasts().addToast(new SystemToast(SystemToast.SystemToastIds.TUTORIAL_HINT,
                                 new TranslatableComponent("You don't know that spell!"), new TranslatableComponent(""))); }
@@ -133,8 +129,7 @@ public class RuneTableScreen extends AbstractContainerScreen<RuneTableMenu> {
                                 new TranslatableComponent("Levitation Blast was infused!"), new TranslatableComponent("")));
                         Wand.setSpellAssignedToWand(wandStack, "Levitation Blast");
                         selectedSlot = pSlotId;
-                        ItemStack newWand = new ItemStack(ModItems.WAND_LEVITATION_BLAST.get());
-                        ((WandSlot) runeTableMenu.getSlot(36)).swapWand(newWand);
+                        ModMessages.sendToServer(new LevitationPacket());
                     } else {
                     Minecraft.getInstance().getToasts().addToast(new SystemToast(SystemToast.SystemToastIds.TUTORIAL_HINT,
                             new TranslatableComponent("You don't know that spell!"), new TranslatableComponent(""))); }
@@ -145,9 +140,7 @@ public class RuneTableScreen extends AbstractContainerScreen<RuneTableMenu> {
                                 new TranslatableComponent("Necromancery was infused!"), new TranslatableComponent("")));
                         Wand.setSpellAssignedToWand(wandStack, "Necromancery");
                         selectedSlot = pSlotId;
-                        newWandStack = new ItemStack(ModItems.WAND_SUMMON_DEMISED.get());
-                        runeTableMenu.getSlot(36).set(newWandStack);
-
+                        ModMessages.sendToServer(new SummonDemisedPacket());
                     } else {
                     Minecraft.getInstance().getToasts().addToast(new SystemToast(SystemToast.SystemToastIds.TUTORIAL_HINT,
                             new TranslatableComponent("You don't know that spell!"), new TranslatableComponent(""))); }
@@ -156,7 +149,7 @@ public class RuneTableScreen extends AbstractContainerScreen<RuneTableMenu> {
             }
             // Play a sound or show a particle effect if desired
             // pPlayer.playSound(SoundEvents.ITEM_BOOK_PAGE_TURN, 1.0F, 1.0F);
-            init(); // refreshing the screen by calling init() again
+
         }
         super.slotClicked(pSlot, pSlotId, pMouseButton, pType);
     }

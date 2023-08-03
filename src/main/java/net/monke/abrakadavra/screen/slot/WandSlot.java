@@ -1,12 +1,9 @@
 package net.monke.abrakadavra.screen.slot;
 
-import net.minecraft.world.entity.player.Player;
 import net.minecraft.world.item.ItemStack;
 import net.minecraftforge.items.IItemHandler;
 import net.minecraftforge.items.SlotItemHandler;
 import net.monke.abrakadavra.item.ModItems;
-import net.monke.abrakadavra.screen.RuneTableScreen;
-import org.jetbrains.annotations.NotNull;
 
 public class WandSlot extends SlotItemHandler {
     public WandSlot(IItemHandler itemHandler, int index, int x, int y) {
