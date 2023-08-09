@@ -55,14 +55,6 @@ public class Wand extends Item {
                     break;
         }
     }
-//    @Override
-//    public InteractionResultHolder<ItemStack> use(Level pLevel, Player pPlayer, InteractionHand pUsedHand) {
-//        if(!pLevel.isClientSide()) {
-//            ItemStack wandStack = pPlayer.getItemInHand(pUsedHand);
-//            Wand.setSpellAssignedToWand(wandStack, "AGGRON IS SUPER");
-//        }
-//        return super.use(pLevel, pPlayer, pUsedHand);
-//    }
     @Override
     public boolean isFoil(ItemStack pStack) {
         return  pStack.getItem() == ModItems.WAND_ICE_BOLT.get() ||

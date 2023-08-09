@@ -18,11 +18,9 @@ import net.monke.abrakadavra.block.custom.RuneTable;
 import net.monke.abrakadavra.item.ModItems;
 import net.monke.abrakadavra.item.function.Wand;
 import net.monke.abrakadavra.networking.ModMessages;
-import net.monke.abrakadavra.networking.packet.C2SPacket;
-import net.monke.abrakadavra.networking.packet.IceBoltPacket;
-import net.monke.abrakadavra.networking.packet.LevitationPacket;
-import net.monke.abrakadavra.networking.packet.SummonDemisedPacket;
+import net.monke.abrakadavra.networking.packet.*;
 import net.monke.abrakadavra.screen.slot.SpellSlot;
+import net.monke.abrakadavra.screen.slot.WandSlot;
 
 
 public class RuneTableScreen extends AbstractContainerScreen<RuneTableMenu> {
@@ -30,7 +28,7 @@ public class RuneTableScreen extends AbstractContainerScreen<RuneTableMenu> {
     public RuneTableScreen(RuneTableMenu pMenu, Inventory pPlayerInventory, Component pTitle) {
         super(pMenu, pPlayerInventory, pTitle);
         this.runeTableMenu = pMenu; }
-    private int selectedSlot = 37;
+    private int selectedSlot = 0;
     public static ItemStack newWandStack;
     private RuneTableMenu runeTableMenu;
     @Override
@@ -63,40 +61,57 @@ public class RuneTableScreen extends AbstractContainerScreen<RuneTableMenu> {
 
         this.blit(pPoseStack, x + 27, y, 0, 0, 230, imageHeight);
 
-        switch (selectedSlot) { // method to render the slot highlight for the particular slot
-            case 37:
-                renderSlotHighlight(pPoseStack, x + 205, y + 88 + 19 * 0); // First slot
-                break;
-            case 38:
-                renderSlotHighlight(pPoseStack, x + 205, y + 88 + 19 * 1); // Second slot
-                break;
-            case 39:
-                renderSlotHighlight(pPoseStack, x + 205, y + 88 + 19 * 2); // Third slot
-                break; }
+        if (runeTableMenu.getSlot(36).hasItem()) {
+            ItemStack wandStack = runeTableMenu.getSlot(36).getItem();
+            if (wandStack.getItem() == ModItems.WAND.get()) {
+                // Handle the wand highlight here
+            } else if (wandStack.getItem() == ModItems.WAND_ICE_BOLT.get()) {
+                selectedSlot = 37;
+//                renderSlotHighlight(pPoseStack, x + 205, y + 88 + 19 * 0); // First slot
+            } else if (wandStack.getItem() == ModItems.WAND_LEVITATION_BLAST.get()) {
+                selectedSlot = 38;
+//                renderSlotHighlight(pPoseStack, x + 205, y + 88 + 19 * 1); // Second slot
+            } else if (wandStack.getItem() == ModItems.WAND_SUMMON_DEMISED.get()) {
+                selectedSlot = 39;
+//                renderSlotHighlight(pPoseStack, x + 205, y + 88 + 19 * 2); // Third slot
+            }
+            switch (selectedSlot) { // method to render the slot highlight for the particular slot
+                case 37:
+                    renderSlotHighlight(pPoseStack, x + 205, y + 88 + 19 * 0); // First slot
+                    break;
+                case 38:
+                    renderSlotHighlight(pPoseStack, x + 205, y + 88 + 19 * 1); // Second slot
+                    break;
+                case 39:
+                    renderSlotHighlight(pPoseStack, x + 205, y + 88 + 19 * 2); // Third slot
+                    break;
+            }
 
-        if (RuneTable.HasIceBoltSpell) {
-            setTexture(new ResourceLocation(Abrakadavra.MOD_ID, "textures/gui/spell_icons/ice_bolt.png"));
-            this.blit(pPoseStack, x + 205, y + 88, 0, 0, 16, 16, 16, 16);
-        } else {
-            setTexture(new ResourceLocation(Abrakadavra.MOD_ID, "textures/gui/spell_icons/ice_bolt_locked.png"));
-            this.blit(pPoseStack, x + 205, y + 88, 0, 0, 16, 16, 16, 16);
-        }
+            if (CheckSpellPacket.HasIceBoltSpell) {
+                setTexture(new ResourceLocation(Abrakadavra.MOD_ID, "textures/gui/spell_icons/ice_bolt.png"));
+                this.blit(pPoseStack, x + 205, y + 88, 0, 0, 16, 16, 16, 16);
+            } else {
+                setTexture(new ResourceLocation(Abrakadavra.MOD_ID, "textures/gui/spell_icons/ice_bolt_locked.png"));
+                this.blit(pPoseStack, x + 205, y + 88, 0, 0, 16, 16, 16, 16);
+            }
 
-        if (RuneTable.HasLevitationBlastspell) {
-            setTexture(new ResourceLocation(Abrakadavra.MOD_ID, "textures/gui/spell_icons/levitation_blast.png"));
-            this.blit(pPoseStack, x + 205, y + 107, 0, 0, 16, 16, 16, 16);
-        } else {
-            setTexture(new ResourceLocation(Abrakadavra.MOD_ID, "textures/gui/spell_icons/levitation_blast_locked.png"));
-            this.blit(pPoseStack, x + 205, y + 107, 0, 0, 16, 16, 16, 16);
-        }
+            if (CheckSpellPacket.HasLevitationBlastspell) {
+                setTexture(new ResourceLocation(Abrakadavra.MOD_ID, "textures/gui/spell_icons/levitation_blast.png"));
+                this.blit(pPoseStack, x + 205, y + 107, 0, 0, 16, 16, 16, 16);
+            } else {
+                setTexture(new ResourceLocation(Abrakadavra.MOD_ID, "textures/gui/spell_icons/levitation_blast_locked.png"));
+                this.blit(pPoseStack, x + 205, y + 107, 0, 0, 16, 16, 16, 16);
+            }
 
-        if (RuneTable.HasSummonDemisedSpell) {
-            setTexture(new ResourceLocation(Abrakadavra.MOD_ID, "textures/gui/spell_icons/summon_demised.png"));
-            this.blit(pPoseStack, x + 205, y + 126, 0, 0, 16, 16, 16, 16);
-        } else {
-            setTexture(new ResourceLocation(Abrakadavra.MOD_ID, "textures/gui/spell_icons/summon_demised_locked.png"));
-            this.blit(pPoseStack, x + 205, y + 126, 0, 0, 16, 16, 16, 16);
+            if (CheckSpellPacket.HasSummonDemisedSpell) {
+                setTexture(new ResourceLocation(Abrakadavra.MOD_ID, "textures/gui/spell_icons/summon_demised.png"));
+                this.blit(pPoseStack, x + 205, y + 126, 0, 0, 16, 16, 16, 16);
+            } else {
+                setTexture(new ResourceLocation(Abrakadavra.MOD_ID, "textures/gui/spell_icons/summon_demised_locked.png"));
+                this.blit(pPoseStack, x + 205, y + 126, 0, 0, 16, 16, 16, 16);
+            }
         }
+        else selectedSlot = -1;
     }
     @Override
     public void render(PoseStack pPoseStack, int mouseX, int mouseY, float delta) {
@@ -113,7 +128,7 @@ public class RuneTableScreen extends AbstractContainerScreen<RuneTableMenu> {
             // Determine the spell name based on the slotId
             switch (pSlotId) {
                 case 37:
-                    if (RuneTable.HasIceBoltSpell) {
+                    if (CheckSpellPacket.HasIceBoltSpell) {
                         Minecraft.getInstance().getToasts().addToast(new SystemToast(SystemToast.SystemToastIds.TUTORIAL_HINT,
                                 new TranslatableComponent("Ice Bolt was infused!"), new TranslatableComponent("")));
                         Wand.setSpellAssignedToWand(wandStack, "Ice Bolt");
@@ -124,7 +139,7 @@ public class RuneTableScreen extends AbstractContainerScreen<RuneTableMenu> {
                                 new TranslatableComponent("You don't know that spell!"), new TranslatableComponent(""))); }
                     break;
                 case 38:
-                    if (RuneTable.HasLevitationBlastspell) {
+                    if (CheckSpellPacket.HasLevitationBlastspell) {
                         Minecraft.getInstance().getToasts().addToast(new SystemToast(SystemToast.SystemToastIds.TUTORIAL_HINT,
                                 new TranslatableComponent("Levitation Blast was infused!"), new TranslatableComponent("")));
                         Wand.setSpellAssignedToWand(wandStack, "Levitation Blast");
@@ -135,20 +150,17 @@ public class RuneTableScreen extends AbstractContainerScreen<RuneTableMenu> {
                             new TranslatableComponent("You don't know that spell!"), new TranslatableComponent(""))); }
                     break;
                 case 39:
-                    if (RuneTable.HasSummonDemisedSpell) {
+                    if (CheckSpellPacket.HasSummonDemisedSpell) {
                         Minecraft.getInstance().getToasts().addToast(new SystemToast(SystemToast.SystemToastIds.TUTORIAL_HINT,
-                                new TranslatableComponent("Necromancery was infused!"), new TranslatableComponent("")));
-                        Wand.setSpellAssignedToWand(wandStack, "Necromancery");
+                                new TranslatableComponent("Summon Demised was infused!"), new TranslatableComponent("")));
+                        Wand.setSpellAssignedToWand(wandStack, "Summon Demised");
                         selectedSlot = pSlotId;
                         ModMessages.sendToServer(new SummonDemisedPacket());
                     } else {
                     Minecraft.getInstance().getToasts().addToast(new SystemToast(SystemToast.SystemToastIds.TUTORIAL_HINT,
                             new TranslatableComponent("You don't know that spell!"), new TranslatableComponent(""))); }
                     break;
-                // Add more cases for other slots if needed
             }
-            // Play a sound or show a particle effect if desired
-            // pPlayer.playSound(SoundEvents.ITEM_BOOK_PAGE_TURN, 1.0F, 1.0F);
 
         }
         super.slotClicked(pSlot, pSlotId, pMouseButton, pType);

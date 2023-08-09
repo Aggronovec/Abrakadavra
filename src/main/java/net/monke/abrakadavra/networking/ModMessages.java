@@ -7,10 +7,7 @@ import net.minecraftforge.network.NetworkRegistry;
 import net.minecraftforge.network.PacketDistributor;
 import net.minecraftforge.network.simple.SimpleChannel;
 import net.monke.abrakadavra.Abrakadavra;
-import net.monke.abrakadavra.networking.packet.C2SPacket;
-import net.monke.abrakadavra.networking.packet.IceBoltPacket;
-import net.monke.abrakadavra.networking.packet.LevitationPacket;
-import net.monke.abrakadavra.networking.packet.SummonDemisedPacket;
+import net.monke.abrakadavra.networking.packet.*;
 
 public class ModMessages {
     private static SimpleChannel INSTANCE;
@@ -46,6 +43,26 @@ public class ModMessages {
                 .decoder(SummonDemisedPacket::new)
                 .encoder(SummonDemisedPacket::toBytes)
                 .consumer(SummonDemisedPacket::handle)
+                .add();
+        net.messageBuilder(IceBoltScrollPacket.class, id(), NetworkDirection.PLAY_TO_SERVER)
+                .decoder(IceBoltScrollPacket::new)
+                .encoder(IceBoltScrollPacket::toBytes)
+                .consumer(IceBoltScrollPacket::handle)
+                .add();
+        net.messageBuilder(LevitationScrollPacket.class, id(), NetworkDirection.PLAY_TO_SERVER)
+                .decoder(LevitationScrollPacket::new)
+                .encoder(LevitationScrollPacket::toBytes)
+                .consumer(LevitationScrollPacket::handle)
+                .add();
+        net.messageBuilder(SummonDemisedScrollPacket.class, id(), NetworkDirection.PLAY_TO_SERVER)
+                .decoder(SummonDemisedScrollPacket::new)
+                .encoder(SummonDemisedScrollPacket::toBytes)
+                .consumer(SummonDemisedScrollPacket::handle)
+                .add();
+        net.messageBuilder(CheckSpellPacket.class, id(), NetworkDirection.PLAY_TO_SERVER)
+                .decoder(CheckSpellPacket::new)
+                .encoder(CheckSpellPacket::toBytes)
+                .consumer(CheckSpellPacket::handle)
                 .add();
     }
     public static <MSG> void sendToServer (MSG message) {
