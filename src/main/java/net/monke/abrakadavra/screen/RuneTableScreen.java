@@ -5,6 +5,7 @@ import com.mojang.blaze3d.vertex.PoseStack;
 import net.minecraft.client.Minecraft;
 import net.minecraft.client.gui.components.toasts.SystemToast;
 import net.minecraft.network.chat.TranslatableComponent;
+import net.minecraft.world.inventory.AbstractContainerMenu;
 import net.minecraft.world.inventory.ClickType;
 import net.minecraft.world.inventory.Slot;
 import net.minecraft.world.item.ItemStack;
@@ -30,6 +31,7 @@ public class RuneTableScreen extends AbstractContainerScreen<RuneTableMenu> {
         this.runeTableMenu = pMenu; }
     private int selectedSlot = 0;
     public static ItemStack newWandStack;
+    public static boolean disableSlots = false;
     private RuneTableMenu runeTableMenu;
     @Override
     protected void init() {
@@ -111,7 +113,9 @@ public class RuneTableScreen extends AbstractContainerScreen<RuneTableMenu> {
                 this.blit(pPoseStack, x + 205, y + 126, 0, 0, 16, 16, 16, 16);
             }
         }
-        else selectedSlot = -1;
+        else {
+            selectedSlot = -1;
+        }
     }
     @Override
     public void render(PoseStack pPoseStack, int mouseX, int mouseY, float delta) {
@@ -161,8 +165,11 @@ public class RuneTableScreen extends AbstractContainerScreen<RuneTableMenu> {
                             new TranslatableComponent("You don't know that spell!"), new TranslatableComponent(""))); }
                     break;
             }
-
         }
         super.slotClicked(pSlot, pSlotId, pMouseButton, pType);
+    }
+    @Override
+    protected void renderLabels(PoseStack pPoseStack, int pMouseX, int pMouseY) {
+//        super.renderLabels(pPoseStack, pMouseX, pMouseY);
     }
 }

@@ -1,0 +1,30 @@
+{
+  "display": {
+    "icon": {
+      "item": "abrakadavra:wand"
+    },
+    "title": "Abrakadavra Wand",
+    "description": "One Wand to rule them all!",
+    "frame": "task",
+    "show_toast": true,
+    "announce_to_chat": true,
+    "background": "abrakadavra:textures/block/rune_table_top.png"
+  },
+  "criteria": {
+    "requirement": {
+      "trigger": "minecraft:inventory_changed",
+      "conditions": {
+        "items": [
+          {
+            "items": [
+              "abrakadavra:wand",
+              "abrakadavra:wand_ice_bolt",
+              "abrakadavra:wand_levitation_blast",
+              "abrakadavra:wand_summon_demised"
+            ]
+          }
+        ]
+      }
+    }
+  }
+}
