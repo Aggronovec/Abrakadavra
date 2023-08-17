@@ -82,22 +82,6 @@ public class RuneTableBlockEntity extends BlockEntity implements MenuProvider {
         Containers.dropContents(this.level, this.worldPosition, inventory);
     }
     public static void tick(Level pLevel, BlockPos pPos, BlockState pState, RuneTableBlockEntity pBlockEntity) {
-//        if(hasRecipe(pBlockEntity) && hasNotReachedStackLimit(pBlockEntity)) {
-//            craftItem(pBlockEntity);
-//        }
+
     }
-//    private static void craftItem(WizardTableBlockEntity entity) {
-//        entity.itemHandler.extractItem(0, 1, false);
-//        entity.itemHandler.extractItem(1, 1, false);
-//        entity.itemHandler.setStackInSlot(2, new ItemStack(ModItems.WAND.get(),
-//                entity.itemHandler.getStackInSlot(2).getCount() + 1));
-//    }
-//   private static boolean hasRecipe(WizardTableBlockEntity entity) {
-//        boolean hasItemInFirstSlot = entity.itemHandler.getStackInSlot(0).getItem() == ModItems.WAND_HANDLE.get();
-//        boolean hasItemInSecondSlot = entity.itemHandler.getStackInSlot(0).getItem() == ModItems.WAND_HANDLE.get();
-//        return hasItemInFirstSlot && hasItemInSecondSlot;
-//    }
-//    private static boolean hasNotReachedStackLimit(WizardTableBlockEntity entity) {
-//        return entity.itemHandler.getStackInSlot(3).getCount() < entity.itemHandler.getStackInSlot(3).getMaxStackSize();
-//    }
 }

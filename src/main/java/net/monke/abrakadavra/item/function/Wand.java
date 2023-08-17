@@ -23,7 +23,7 @@ public class Wand extends Item {
         super(pProperties);
     }
     private static final String SPELL_NBT_KEY = "SpellAssignedToWand ";
-    public static final String DEFAULT_SPELL = "Ice Bolt"; // Default spell if no spell is assigned
+    public static final String DEFAULT_SPELL = ""; // Default spell if no spell is assigned
     public static void setSpellAssignedToWand(ItemStack wandStack, String spellName) {
         CompoundTag nbtData = new CompoundTag();
 //        CompoundTag wandTag = wandStack.getOrCreateTag();
@@ -40,18 +40,26 @@ public class Wand extends Item {
     @Override
     public void appendHoverText(ItemStack pStack, @Nullable Level pLevel, List<Component> pTooltipComponents, TooltipFlag pIsAdvanced) {
         String spellName = getSpellAssignedToWand(pStack);
-        pTooltipComponents.add(new TranslatableComponent("tooltip.abrakadavra.wand.tooltip").append(new TextComponent(spellName)));
+        switch (getRegistryName().toString()) {
+            case "abrakadavra:wand":
+                    pTooltipComponents.add(new TranslatableComponent("tooltip.abrakadavra.wand.tooltip")); // + .append(new TextComponent(spellName)
+                    break;
+            case "abrakadavra:wand_ice_bolt":
+                    pTooltipComponents.add(new TranslatableComponent("tooltip.abrakadavra.wand_ice_bolt.tooltip")); // + .append(new TextComponent(spellName)
+                    break;
+            case "abrakadavra:wand_levitation_blast":
+                    pTooltipComponents.add(new TranslatableComponent("tooltip.abrakadavra.wand_levitation_blast.tooltip")); // + .append(new TextComponent(spellName)
+                    break;
+            case "abrakadavra:wand_summon_demised":
+                    pTooltipComponents.add(new TranslatableComponent("tooltip.abrakadavra.wand_summon_demised.tooltip")); // + .append(new TextComponent(spellName)
+                    break;
+        }
     }
-//    @Override
-//    public InteractionResultHolder<ItemStack> use(Level pLevel, Player pPlayer, InteractionHand pUsedHand) {
-//        if(!pLevel.isClientSide()) {
-//            ItemStack wandStack = pPlayer.getItemInHand(pUsedHand);
-//            Wand.setSpellAssignedToWand(wandStack, "AGGRON IS SUPER");
-//        }
-//        return super.use(pLevel, pPlayer, pUsedHand);
-//    }
     @Override
     public boolean isFoil(ItemStack pStack) {
-        return pStack.hasTag();
+        return  pStack.getItem() == ModItems.WAND_ICE_BOLT.get() ||
+                pStack.getItem() == ModItems.WAND_LEVITATION_BLAST.get() ||
+                pStack.getItem() == ModItems.WAND_SUMMON_DEMISED.get();
+        //        return pStack.hasTag();
     }
 }

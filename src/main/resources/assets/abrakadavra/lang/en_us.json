@@ -4,11 +4,17 @@
   "item.abrakadavra.levitation_blast_spell_scroll": "Spell Scroll of Air",
   "item.abrakadavra.summon_demised_spell_scroll": "Spell Scroll of Necromancy",
   "item.abrakadavra.wand": "§dAbrakadavra wand§r",
+  "item.abrakadavra.wand_ice_bolt": "§dwand§r of Ice Bolt",
+  "item.abrakadavra.wand_levitation_blast": "§dwand§r of Levitation Blast",
+  "item.abrakadavra.wand_summon_demised": "§dwand§r of Summon Demised",
 
   "block.abrakadavra.rune_block": "Rune Block",
   "block.abrakadavra.rune_table": "Rune Table",
 
   "itemGroup.abrakadavratab": "Abrakadavra mod",
 
-  "tooltip.abrakadavra.wand.tooltip": "§8Spells assigned to wand:§r"
+  "tooltip.abrakadavra.wand.tooltip": "No spell are assigned to this Wand",
+  "tooltip.abrakadavra.wand_ice_bolt.tooltip": "§8Spells assigned to wand:§r Ice Bolt",
+  "tooltip.abrakadavra.wand_levitation_blast.tooltip": "§8Spells assigned to wand:§r Levitation Blast",
+  "tooltip.abrakadavra.wand_summon_demised.tooltip": "§8Spells assigned to wand:§r Summon Demised"
 }

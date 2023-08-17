@@ -1,0 +1,27 @@
+{
+  "display": {
+    "icon": {
+      "item": "abrakadavra:rune_table"
+    },
+    "title": "Rune Table",
+    "description": "The fun begins now!",
+    "show_toast": true,
+    "announce_to_chat": true,
+    "hidden": false
+  },
+  "parent": "abrakadavra:abrakadavra",
+  "criteria": {
+    "requirement": {
+      "trigger": "minecraft:placed_block",
+      "conditions": {
+        "block": "abrakadavra:rune_table"
+      }
+    }
+  },
+  "rewards": {
+    "loot": [
+      "abrakadavra:items/ice_bolt_spell_scroll",
+      "abrakadavra:item/ice_spell_scroll"
+    ]
+  }
+}

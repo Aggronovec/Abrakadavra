@@ -1,0 +1,58 @@
+{
+  "display": {
+    "icon": {
+      "item": "minecraft:knowledge_book"
+    },
+    "title": "Wizard",
+    "description": "What is better than having learnt a spell? Having learnt all of them!",
+    "show_toast": true,
+    "announce_to_chat": true,
+    "hidden": false
+  },
+  "parent": "abrakadavra:abrakadavra",
+  "criteria": {
+    "ice_bolt": {
+      "trigger": "minecraft:using_item",
+      "conditions": {
+        "items": [
+          {
+          "items": [
+            "abrakadavra:ice_bolt_spell_scroll"
+          ]
+        }
+          ]
+      }
+    },
+    "levitation_blast": {
+      "trigger": "minecraft:using_item",
+      "conditions": {
+        "items": [
+          {
+          "items": [
+            "abrakadavra:levitation_blast_spell_scroll"
+          ]
+        }
+          ]
+      }
+    },
+    "summon_demised": {
+      "trigger": "minecraft:using_item",
+      "conditions": {
+        "items": [
+          {
+          "items": [
+            "abrakadavra:summon_demised_spell_scroll"
+          ]
+        }
+          ]
+      }
+    }
+  },
+"requirements": [
+[
+"ice_bolt",
+"levitation_blast",
+"summon_demised"
+]
+]
+}

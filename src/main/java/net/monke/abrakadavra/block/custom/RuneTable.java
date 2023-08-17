@@ -19,19 +19,16 @@ import net.minecraftforge.network.NetworkHooks;
 import net.monke.abrakadavra.block.entity.ModBlockEntities;
 import net.monke.abrakadavra.block.entity.RuneTableBlockEntity;
 import net.monke.abrakadavra.item.function.Wand;
-import net.monke.abrakadavra.screen.RuneTableScreen;
+import net.monke.abrakadavra.networking.ModMessages;
+import net.monke.abrakadavra.networking.packet.CheckSpellPacket;
 import org.jetbrains.annotations.Nullable;
-
-import static net.monke.abrakadavra.item.function.LevitationBlastSpellScroll.LEARNED_SPELLS_KEY;
 
 public class RuneTable extends BaseEntityBlock {
 
     public RuneTable(Properties properties) {
         super(properties);
     }
-    public static boolean HasLevitationBlastspell = false;
-    public static boolean HasSummonDemisedSpell = false;
-    public static boolean HasIceBoltSpell = false;
+    private String LEARNED_SPELLS_KEY = "LearnedSpells";
     @Override
     public RenderShape getRenderShape(BlockState pState) {
         return RenderShape.MODEL;
@@ -55,17 +52,7 @@ public class RuneTable extends BaseEntityBlock {
                 throw new IllegalStateException("Hey you idiot, the Container is freaking missing!");
             }
             }
-        CompoundTag playerData = pPlayer.getPersistentData();
-        CompoundTag persistentData = playerData.getCompound(LEARNED_SPELLS_KEY);
-        if (persistentData.contains("Ice Bolt")) {
-            HasIceBoltSpell = true;
-        }
-        if (persistentData.contains("Levitation Blast")){
-            HasLevitationBlastspell = true;
-        }
-        if (persistentData.contains("Summon Demised")){
-            HasSummonDemisedSpell = true;
-        }
+            ModMessages.sendToServer(new CheckSpellPacket());
         return InteractionResult.sidedSuccess(pLevel.isClientSide());
     }
     @Nullable

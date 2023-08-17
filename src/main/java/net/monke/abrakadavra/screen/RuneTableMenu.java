@@ -35,10 +35,12 @@ public class RuneTableMenu extends AbstractContainerMenu {
 
         this.blockEntity.getCapability(CapabilityItemHandler.ITEM_HANDLER_CAPABILITY).ifPresent(handler -> {
             this.addSlot(new WandSlot(handler, 0, 80, 45));
+//            if (RuneTableScreen.disableSlots) {
             this.addSlot(new SpellSlot(handler, 1, 178, 88));
             this.addSlot(new SpellSlot(handler, 2, 178, 107));
-            this.addSlot(new SpellSlot(handler, 3, 178, 126));
-        });
+            this.addSlot(new SpellSlot(handler, 3, 178, 126));}
+//        }
+        );
     }
     // CREDIT GOES TO: diesieben07 | https://github.com/diesieben07/SevenCommons
     // must assign a slot number to each of the slots used by the GUI.
@@ -105,5 +107,4 @@ public class RuneTableMenu extends AbstractContainerMenu {
             this.addSlot(new Slot(playerInventory, i, 8 + i * 18, 144));
         }
     }
-
 }

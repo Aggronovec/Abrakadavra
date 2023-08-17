@@ -16,14 +16,18 @@ public class ModItems {
             DeferredRegister.create(ForgeRegistries.ITEMS, Abrakadavra.MOD_ID);
 
     //WAND
-
     public static final RegistryObject<Item> WAND = ITEMS.register("wand", () -> new Wand(new Item.Properties().tab(ModAbrakadavraTab.ABRAKADAVRA_TAB).
             durability(150)));
+    public static final RegistryObject<Item> WAND_ICE_BOLT = ITEMS.register("wand_ice_bolt", () -> new Wand(new Item.Properties().tab(ModAbrakadavraTab.ABRAKADAVRA_TAB).
+            durability(150)));
+    public static final RegistryObject<Item> WAND_LEVITATION_BLAST = ITEMS.register("wand_levitation_blast", () -> new Wand(new Item.Properties().tab(ModAbrakadavraTab.ABRAKADAVRA_TAB).
+            durability(150)));
+    public static final RegistryObject<Item> WAND_SUMMON_DEMISED = ITEMS.register("wand_summon_demised", () -> new Wand(new Item.Properties().tab(ModAbrakadavraTab.ABRAKADAVRA_TAB).
+            durability(150)));
     public static final RegistryObject<Item> WAND_HANDLE = ITEMS.register("wand_handle", () -> new Item(new Item.Properties().tab(ModAbrakadavraTab.ABRAKADAVRA_TAB).
-            stacksTo(16)));
+            stacksTo(4)));
 
     //SPELL SCROLLS
-
     public static final RegistryObject<Item> ICE_BOLT_SPELL_SCROLL = ITEMS.register("ice_bolt_spell_scroll", () -> new IceBoltSpellScroll(new Item.Properties().tab(ModAbrakadavraTab.ABRAKADAVRA_TAB).
             stacksTo(1)));
     public static final RegistryObject<Item> LEVITATION_BLAST_SPELL_SCROLL = ITEMS.register("levitation_blast_spell_scroll", () -> new LevitationBlastSpellScroll(new Item.Properties().tab(ModAbrakadavraTab.ABRAKADAVRA_TAB).
