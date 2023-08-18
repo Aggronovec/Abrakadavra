@@ -19,6 +19,7 @@ import net.monke.abrakadavra.networking.ModMessages;
 import net.monke.abrakadavra.screen.ModMenuTypes;
 import net.monke.abrakadavra.screen.RuneTableScreen;
 import net.monke.abrakadavra.screen.WandUpdatePacket;
+import net.monke.abrakadavra.sound.ModSounds;
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
 
@@ -35,6 +36,8 @@ public class Abrakadavra {
 
         ModItems.register(eventBus);
         ModBlocks.register(eventBus);
+
+        ModSounds.register(eventBus);
 
         ModBlockEntities.register(eventBus);
         ModMenuTypes.register(eventBus);

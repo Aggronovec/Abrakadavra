@@ -4,7 +4,9 @@ import com.mojang.blaze3d.systems.RenderSystem;
 import com.mojang.blaze3d.vertex.PoseStack;
 import net.minecraft.client.Minecraft;
 import net.minecraft.client.gui.components.toasts.SystemToast;
+import net.minecraft.network.chat.TextComponent;
 import net.minecraft.network.chat.TranslatableComponent;
+import net.minecraft.world.entity.player.Player;
 import net.minecraft.world.inventory.AbstractContainerMenu;
 import net.minecraft.world.inventory.ClickType;
 import net.minecraft.world.inventory.Slot;
@@ -30,7 +32,8 @@ public class RuneTableScreen extends AbstractContainerScreen<RuneTableMenu> {
         super(pMenu, pPlayerInventory, pTitle);
         this.runeTableMenu = pMenu; }
     private int selectedSlot = 0;
-    public static ItemStack newWandStack;
+    private ItemStack previousWandStack = ItemStack.EMPTY;
+    private boolean insertedWandSlot = true;
     public static boolean disableSlots = false;
     private RuneTableMenu runeTableMenu;
     @Override
@@ -64,6 +67,7 @@ public class RuneTableScreen extends AbstractContainerScreen<RuneTableMenu> {
         this.blit(pPoseStack, x + 27, y, 0, 0, 230, imageHeight);
 
         if (runeTableMenu.getSlot(36).hasItem()) {
+//            ModMessages.sendToServer(new RuneTablePacket());
             ItemStack wandStack = runeTableMenu.getSlot(36).getItem();
             if (wandStack.getItem() == ModItems.WAND.get()) {
                 // Handle the wand highlight here
@@ -126,6 +130,7 @@ public class RuneTableScreen extends AbstractContainerScreen<RuneTableMenu> {
 
     @Override
     public void slotClicked(Slot pSlot, int pSlotId, int pMouseButton, ClickType pType) {
+        Player player = Minecraft.getInstance().player;
         // Check if the clicked slot is a spell slot and the wand is present in the WandSlot
         if (pSlot instanceof SpellSlot && pMouseButton == 0 && runeTableMenu.getSlot(36).hasItem()) {
             ItemStack wandStack = runeTableMenu.getSlot(36).getItem();
@@ -133,36 +138,45 @@ public class RuneTableScreen extends AbstractContainerScreen<RuneTableMenu> {
             switch (pSlotId) {
                 case 37:
                     if (CheckSpellPacket.HasIceBoltSpell) {
-                        Minecraft.getInstance().getToasts().addToast(new SystemToast(SystemToast.SystemToastIds.TUTORIAL_HINT,
-                                new TranslatableComponent("Ice Bolt was infused!"), new TranslatableComponent("")));
+                        player.displayClientMessage(new TranslatableComponent("Ice Bolt was infused!"), true);
+//                        Minecraft.getInstance().getToasts().addToast(new SystemToast(SystemToast.SystemToastIds.TUTORIAL_HINT,
+//                                new TranslatableComponent("Ice Bolt was infused!"), new TranslatableComponent("")));
                         Wand.setSpellAssignedToWand(wandStack, "Ice Bolt");
                         selectedSlot = pSlotId;
                         ModMessages.sendToServer(new IceBoltPacket());
                     } else {
-                        Minecraft.getInstance().getToasts().addToast(new SystemToast(SystemToast.SystemToastIds.TUTORIAL_HINT,
-                                new TranslatableComponent("You don't know that spell!"), new TranslatableComponent(""))); }
+                        player.displayClientMessage(new TranslatableComponent("You don't yet know Ice Bolt spell!"), true);
+//                        Minecraft.getInstance().getToasts().addToast(new SystemToast(SystemToast.SystemToastIds.TUTORIAL_HINT,
+//                                new TranslatableComponent("You don't yet know Ice Bolt spell!"), new TranslatableComponent("")));
+                                }
                     break;
                 case 38:
                     if (CheckSpellPacket.HasLevitationBlastspell) {
-                        Minecraft.getInstance().getToasts().addToast(new SystemToast(SystemToast.SystemToastIds.TUTORIAL_HINT,
-                                new TranslatableComponent("Levitation Blast was infused!"), new TranslatableComponent("")));
+                        player.displayClientMessage(new TranslatableComponent("Levitation Blast was infused!"), true);
+//                        Minecraft.getInstance().getToasts().addToast(new SystemToast(SystemToast.SystemToastIds.TUTORIAL_HINT,
+//                                new TranslatableComponent("Levitation Blast was infused!"), new TranslatableComponent("")));
                         Wand.setSpellAssignedToWand(wandStack, "Levitation Blast");
                         selectedSlot = pSlotId;
                         ModMessages.sendToServer(new LevitationPacket());
                     } else {
-                    Minecraft.getInstance().getToasts().addToast(new SystemToast(SystemToast.SystemToastIds.TUTORIAL_HINT,
-                            new TranslatableComponent("You don't know that spell!"), new TranslatableComponent(""))); }
+                        player.displayClientMessage(new TranslatableComponent("You don't yet know Levitation Blast spell!"), true);
+//                    Minecraft.getInstance().getToasts().addToast(new SystemToast(SystemToast.SystemToastIds.TUTORIAL_HINT,
+//                            new TranslatableComponent("You don't yet know Levitation Blast spell!"), new TranslatableComponent("")));
+                            }
                     break;
                 case 39:
                     if (CheckSpellPacket.HasSummonDemisedSpell) {
-                        Minecraft.getInstance().getToasts().addToast(new SystemToast(SystemToast.SystemToastIds.TUTORIAL_HINT,
-                                new TranslatableComponent("Summon Demised was infused!"), new TranslatableComponent("")));
+                        player.displayClientMessage(new TranslatableComponent("Summon Demised was infused!"), true);
+//                        Minecraft.getInstance().getToasts().addToast(new SystemToast(SystemToast.SystemToastIds.TUTORIAL_HINT,
+//                                new TranslatableComponent("Summon Demised was infused!"), new TranslatableComponent("")));
                         Wand.setSpellAssignedToWand(wandStack, "Summon Demised");
                         selectedSlot = pSlotId;
                         ModMessages.sendToServer(new SummonDemisedPacket());
                     } else {
-                    Minecraft.getInstance().getToasts().addToast(new SystemToast(SystemToast.SystemToastIds.TUTORIAL_HINT,
-                            new TranslatableComponent("You don't know that spell!"), new TranslatableComponent(""))); }
+                    player.displayClientMessage(new TranslatableComponent("You don't yet know Summon Demised spell!"), true);
+//                    Minecraft.getInstance().getToasts().addToast(new SystemToast(SystemToast.SystemToastIds.TUTORIAL_HINT,
+//                            new TranslatableComponent("You don't yet know Summon Demised spell!"), new TranslatableComponent("")));
+                            }
                     break;
             }
         }
@@ -171,5 +185,26 @@ public class RuneTableScreen extends AbstractContainerScreen<RuneTableMenu> {
     @Override
     protected void renderLabels(PoseStack pPoseStack, int pMouseX, int pMouseY) {
 //        super.renderLabels(pPoseStack, pMouseX, pMouseY);
+    }
+
+    @Override
+    protected void containerTick() {
+        super.containerTick();
+    if (runeTableMenu.getSlot(36).hasItem()) {
+        if (!insertedWandSlot) {
+            ModMessages.sendToServer(new PlaceWandPacket());
+            insertedWandSlot = true;
+        }
+    } else {
+        insertedWandSlot = false;
+    }
+//        ItemStack currentWandStack = runeTableMenu.getSlot(36).getItem();
+//        if (!ItemStack.matches(currentWandStack, previousWandStack)) {
+//            previousWandStack = currentWandStack;
+            // Check if the wand has been inserted into the slot
+//            if (!currentWandStack.isEmpty()) {
+//                ModMessages.sendToServer(new PlaceWandPacket());
+//            }
+//        }
     }
 }
