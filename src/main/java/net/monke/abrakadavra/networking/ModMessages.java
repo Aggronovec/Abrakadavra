@@ -64,6 +64,16 @@ public class ModMessages {
                 .encoder(CheckSpellPacket::toBytes)
                 .consumer(CheckSpellPacket::handle)
                 .add();
+        net.messageBuilder(PlaceWandPacket.class, id(), NetworkDirection.PLAY_TO_SERVER)
+                .decoder(PlaceWandPacket::new)
+                .encoder(PlaceWandPacket::toBytes)
+                .consumer(PlaceWandPacket::handle)
+                .add();
+        net.messageBuilder(RuneTablePacket.class, id(), NetworkDirection.PLAY_TO_SERVER)
+                .decoder(RuneTablePacket::new)
+                .encoder(RuneTablePacket::toBytes)
+                .consumer(RuneTablePacket::handle)
+                .add();
     }
     public static <MSG> void sendToServer (MSG message) {
         INSTANCE.sendToServer(message);

@@ -1,0 +1,23 @@
+{
+  "type": "minecraft:advancement_reward",
+  "pools": [
+    {
+      "rolls": 1,
+      "bonus_rolls": 0,
+      "entries": [
+        {
+          "type": "minecraft:item",
+          "name": "abrakadavra:ice_bolt_spell_scroll"
+        },
+        {
+          "type": "minecraft:item",
+          "name": "abrakadavra:summon_demised_spell_scroll"
+        },
+        {
+          "type": "minecraft:item",
+          "name": "abrakadavra:levitation_blast_spell_scroll"
+        }
+      ]
+    }
+  ]
+}

@@ -34,17 +34,17 @@ public class SummonDemisedScrollPacket {
             }
             CompoundTag persistentData = playerData.getCompound(LEARNED_SPELLS_KEY);
             if (persistentData.contains(spellId)) {
-                Minecraft.getInstance().getToasts().addToast(new SystemToast(SystemToast.SystemToastIds.TUTORIAL_HINT,
-                        new TranslatableComponent(spellId + " already known!"), new TranslatableComponent("")));
-//                player.displayClientMessage(new TranslatableComponent("You already know the " + spellId + " spell!"), true);
+//                Minecraft.getInstance().getToasts().addToast(new SystemToast(SystemToast.SystemToastIds.TUTORIAL_HINT,
+//                        new TranslatableComponent(spellId + " already known!"), new TranslatableComponent("")));
+                player.displayClientMessage(new TranslatableComponent("You already know the " + spellId + " spell!"), true);
                 level.playSound(null, player.getOnPos(), SoundEvents.BOOK_PUT, SoundSource.PLAYERS,
                         0.8F, level.random.nextFloat() * 0.1F + 0.9F);
             } else {
                 persistentData.putBoolean(spellId, true); // These two lines write you into the chat whether the spell was already written in data
                 playerData.put(LEARNED_SPELLS_KEY, persistentData);
-//                player.displayClientMessage(new TranslatableComponent("You have just learnt the " + spellId + " spell!"), true);
-                Minecraft.getInstance().getToasts().addToast(new SystemToast(SystemToast.SystemToastIds.TUTORIAL_HINT,
-                        new TranslatableComponent(spellId + " learnt!"), new TranslatableComponent("")));
+                player.displayClientMessage(new TranslatableComponent("You have just learnt the " + spellId + " spell!"), true);
+//                Minecraft.getInstance().getToasts().addToast(new SystemToast(SystemToast.SystemToastIds.TUTORIAL_HINT,
+//                        new TranslatableComponent(spellId + " learnt!"), new TranslatableComponent("")));
                 player.getInventory().removeItem(player.getItemInHand(InteractionHand.MAIN_HAND));
                 level.playSound(null, player.getOnPos(), SoundEvents.BOOK_PAGE_TURN, SoundSource.PLAYERS,
                         0.8F, level.random.nextFloat() * 0.1F + 0.9F);

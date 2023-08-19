@@ -2,6 +2,7 @@ package net.monke.abrakadavra.networking.packet;
 
 import net.minecraft.nbt.CompoundTag;
 import net.minecraft.network.FriendlyByteBuf;
+import net.minecraft.network.chat.TextComponent;
 import net.minecraft.network.chat.TranslatableComponent;
 import net.minecraft.server.level.ServerLevel;
 import net.minecraft.server.level.ServerPlayer;
@@ -32,6 +33,7 @@ public class CheckSpellPacket {
                 HasLevitationBlastspell = true;}
             if (persistentData.contains("Summon Demised")) {
                 HasSummonDemisedSpell = true;}
+            player.displayClientMessage(new TextComponent(playerData.getAsString()), true);
         });
         return true;
     }

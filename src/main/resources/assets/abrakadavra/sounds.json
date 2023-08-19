@@ -1,0 +1,15 @@
+{
+  "place_wand": {
+    "subtitle": "sounds.abrakadavra.place_wand",
+    "sounds": [
+      "abrakadavra:place_wand"
+    ]
+  },
+
+"rune_table": {
+"subtitle": "sounds.abrakadavra.rune_table",
+"sounds": [
+"abrakadavra:rune_table"
+]
+}
+}
