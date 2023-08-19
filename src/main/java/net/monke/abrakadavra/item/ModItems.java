@@ -35,6 +35,8 @@ public class ModItems {
     public static final RegistryObject<Item> SUMMON_DEMISED_SPELL_SCROLL = ITEMS.register("summon_demised_spell_scroll", () -> new SummonDemisedSpellScroll(new Item.Properties().tab(ModAbrakadavraTab.ABRAKADAVRA_TAB).
             stacksTo(1)));
 
+    public static final RegistryObject<Item> SORCERERS_MANUAL = ITEMS.register("sorcerers_manual", () -> new Item(new Item.Properties().tab(ModAbrakadavraTab.ABRAKADAVRA_TAB)));
+
     public static void register(IEventBus eventBus) {
         ITEMS.register(eventBus);
     }

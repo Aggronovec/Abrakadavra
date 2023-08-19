@@ -1,0 +1,22 @@
+{
+  "type": "minecraft:crafting_shaped",
+  "pattern": [
+    "YS",
+    "S#"
+  ],
+  "key": {
+    "S": {
+      "item": "minecraft:lapis_lazuli"
+    },
+    "Y": {
+      "item": "minecraft:gold_nugget"
+    },
+    "#": {
+      "item": "minecraft:book"
+    }
+  },
+  "result": {
+    "item": "abrakadavra:sorcerers_manual",
+    "count": 1
+  }
+}
