@@ -52,7 +52,7 @@ public class RuneTableScreen extends AbstractContainerScreen<RuneTableMenu> {
             // Here, we assume the first slot is index 0, second slot index 1, and so on.
             // Render the highlight texture here, you can use blit or any other method as needed
             setTexture(new ResourceLocation(Abrakadavra.MOD_ID, "textures/gui/rune_table_gui.png"));
-            this.blit(pPoseStack, x - 2, y - 2, 32, 169, 20, 20);
+            this.blit(pPoseStack, x - 1, y - 1, 31, 169, 18, 18);
 //            fill(pPoseStack, x - 1, y - 1, x + 18, y + 18, 0xFFFF0000); // Red color (Alpha, Red, Green, Blue)
         }
     }

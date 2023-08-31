@@ -33,7 +33,7 @@ public class CheckSpellPacket {
                 HasLevitationBlastspell = true;}
             if (persistentData.contains("Summon Demised")) {
                 HasSummonDemisedSpell = true;}
-            player.displayClientMessage(new TextComponent(playerData.getAsString()), true);
+//            player.displayClientMessage(new TextComponent(playerData.getAsString()), true);
         });
         return true;
     }

@@ -1,10 +1,6 @@
 package net.monke.abrakadavra;
 
 import net.minecraft.client.gui.screens.MenuScreens;
-import net.minecraft.resources.ResourceLocation;
-import net.minecraftforge.network.NetworkRegistry;
-import net.minecraftforge.network.simple.SimpleChannel;
-import net.monke.abrakadavra.entity.EntityTypes;
 import net.minecraft.world.level.block.Blocks;
 import net.minecraftforge.common.MinecraftForge;
 import net.minecraftforge.eventbus.api.IEventBus;
@@ -18,7 +14,6 @@ import net.monke.abrakadavra.block.ModBlocks;
 import net.monke.abrakadavra.networking.ModMessages;
 import net.monke.abrakadavra.screen.ModMenuTypes;
 import net.monke.abrakadavra.screen.RuneTableScreen;
-import net.monke.abrakadavra.screen.WandUpdatePacket;
 import net.monke.abrakadavra.sound.ModSounds;
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
@@ -41,8 +36,6 @@ public class Abrakadavra {
 
         ModBlockEntities.register(eventBus);
         ModMenuTypes.register(eventBus);
-
-        EntityTypes.ENTITY_TYPES.register(eventBus);
 
         eventBus.addListener(this::setup);
         eventBus.addListener(this::clientSetup);

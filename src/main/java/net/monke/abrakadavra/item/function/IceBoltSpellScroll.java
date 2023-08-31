@@ -15,7 +15,7 @@ public class IceBoltSpellScroll extends Item {
     }
     @Override
     public InteractionResultHolder<ItemStack> use(Level pLevel, Player pPlayer, InteractionHand pUsedHand) {
-        if (!pLevel.isClientSide()) { // Only send the packet from the client side
+        if (!pLevel.isClientSide()) { // Only send the packet from the server side
             ModMessages.sendToServer(new IceBoltScrollPacket());
         }
         return super.use(pLevel, pPlayer, pUsedHand);
