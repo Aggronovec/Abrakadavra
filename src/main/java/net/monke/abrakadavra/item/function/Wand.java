@@ -1,5 +1,6 @@
 package net.monke.abrakadavra.item.function;
 
+import net.minecraft.core.particles.ParticleTypes;
 import net.minecraft.nbt.CompoundTag;
 import net.minecraft.network.chat.Component;
 import net.minecraft.network.chat.TextComponent;
@@ -7,12 +8,15 @@ import net.minecraft.network.chat.TranslatableComponent;
 import net.minecraft.world.InteractionHand;
 import net.minecraft.world.InteractionResult;
 import net.minecraft.world.InteractionResultHolder;
+import net.minecraft.world.entity.LivingEntity;
 import net.minecraft.world.entity.player.Player;
 import net.minecraft.world.item.Item;
 import net.minecraft.world.item.ItemStack;
 import net.minecraft.world.item.TooltipFlag;
 import net.minecraft.world.item.context.UseOnContext;
 import net.minecraft.world.level.Level;
+import net.monke.abrakadavra.entity.EntityInit;
+import net.monke.abrakadavra.entity.IceBoltEntity;
 import net.monke.abrakadavra.item.ModItems;
 import org.jetbrains.annotations.Nullable;
 
@@ -61,5 +65,21 @@ public class Wand extends Item {
                 pStack.getItem() == ModItems.WAND_LEVITATION_BLAST.get() ||
                 pStack.getItem() == ModItems.WAND_SUMMON_DEMISED.get();
         //        return pStack.hasTag();
+    }
+
+    @Override
+    public InteractionResultHolder<ItemStack> use(Level pLevel, Player pPlayer, InteractionHand pUsedHand) {
+        if (!pPlayer.level.isClientSide()){
+
+            IceBoltEntity arrow = new IceBoltEntity(EntityInit.ICE_BOLT_PROJECTILE.get(), pPlayer, pPlayer.level);
+            arrow.setDeltaMovement(0, 1, 0); // directly up
+            pPlayer.level.addFreshEntity(arrow);
+        } else {
+            for (int i = 0; i < 10; i++) {
+                pLevel.addParticle(ParticleTypes.SNOWFLAKE, pPlayer.getX() + pLevel.random.nextDouble(),
+                        pPlayer.getY() + 1.2D + pLevel.random.nextDouble(0.8), pPlayer.getZ(),
+                        0d, 0.015d + pLevel.random.nextDouble(0.075d), 0d);}
+        }
+        return super.use(pLevel, pPlayer, pUsedHand);
     }
 }

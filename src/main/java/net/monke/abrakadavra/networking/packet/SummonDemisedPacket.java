@@ -31,10 +31,6 @@ public class SummonDemisedPacket {
 //            player.getInventory().add(new ItemStack(ModItems.WAND_LEVITATION_BLAST.get()));
             level.playSound(null, player.getOnPos(), SoundEvents.AMETHYST_BLOCK_CHIME, SoundSource.PLAYERS,
                     level.random.nextFloat()*0.8F+1.5F, level.random.nextFloat()*0.1F+0.9F);
-            double posX = player.getX(); // X position of the player
-            double posY = player.getY(); // Y position of the player
-            double posZ = player.getZ(); // Z position of the player
-            level.addParticle(ParticleTypes.SOUL,posX, posY, posZ, 0.0, 0.0, 0.0);
 //            level.sendParticles(ParticleTypes.SOUL_FIRE_FLAME,posX, posY, posZ,100,posX+5, posY+5, posZ+5,1);
         });
         return true;

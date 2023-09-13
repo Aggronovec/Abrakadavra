@@ -11,5 +11,22 @@
 "sounds": [
 "abrakadavra:rune_table"
 ]
+},
+
+  "ice_bolt_impact": {
+"subtitle": "sounds.abrakadavra.ice_bolt_impact",
+"sounds": [
+"abrakadavra:ice_bolt_impact"
+]
+},
+
+"ice_bolt_cast": {
+"subtitle": "sounds.abrakadavra.ice_bolt_cast",
+  "sounds": [
+    "abrakadavra:ice_bolt_cast_1",
+    "abrakadavra:ice_bolt_cast_2",
+    "abrakadavra:ice_bolt_cast_3",
+    "abrakadavra:ice_bolt_cast_4"
+  ]
 }
 }

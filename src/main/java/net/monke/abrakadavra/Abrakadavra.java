@@ -9,6 +9,8 @@ import net.minecraftforge.fml.event.lifecycle.FMLClientSetupEvent;
 import net.minecraftforge.fml.event.lifecycle.FMLCommonSetupEvent;
 import net.minecraftforge.fml.javafmlmod.FMLJavaModLoadingContext;
 import net.monke.abrakadavra.block.entity.ModBlockEntities;
+import net.monke.abrakadavra.effect.ModEffects;
+import net.monke.abrakadavra.entity.EntityInit;
 import net.monke.abrakadavra.item.ModItems;
 import net.monke.abrakadavra.block.ModBlocks;
 import net.monke.abrakadavra.networking.ModMessages;
@@ -33,9 +35,12 @@ public class Abrakadavra {
         ModBlocks.register(eventBus);
 
         ModSounds.register(eventBus);
+        ModEffects.register(eventBus);
 
         ModBlockEntities.register(eventBus);
         ModMenuTypes.register(eventBus);
+
+        EntityInit.ENTITY_TYPES.register(eventBus);
 
         eventBus.addListener(this::setup);
         eventBus.addListener(this::clientSetup);

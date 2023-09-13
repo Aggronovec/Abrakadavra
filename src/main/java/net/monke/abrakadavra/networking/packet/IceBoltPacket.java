@@ -31,11 +31,6 @@ public class IceBoltPacket {
 //            player.getInventory().add(new ItemStack(ModItems.WAND_LEVITATION_BLAST.get()));
             level.playSound(null, player.getOnPos(), SoundEvents.AMETHYST_BLOCK_CHIME, SoundSource.PLAYERS,
                     1.2F, level.random.nextFloat()*0.1F+0.9F);
-            double posX = player.getX(); // X position of the player
-            double posY = player.getY(); // Y position of the player
-            double posZ = player.getZ(); // Z position of the player
-            level.addParticle(ParticleTypes.SNOWFLAKE,posX + 1,posY,posZ, 1.0, 1.0, 1.0);
-
         });
         return true;
     }

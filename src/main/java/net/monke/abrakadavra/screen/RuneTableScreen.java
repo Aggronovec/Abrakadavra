@@ -4,6 +4,7 @@ import com.mojang.blaze3d.systems.RenderSystem;
 import com.mojang.blaze3d.vertex.PoseStack;
 import net.minecraft.client.Minecraft;
 import net.minecraft.client.gui.components.toasts.SystemToast;
+import net.minecraft.core.particles.ParticleTypes;
 import net.minecraft.network.chat.TextComponent;
 import net.minecraft.network.chat.TranslatableComponent;
 import net.minecraft.world.entity.player.Player;
@@ -11,6 +12,7 @@ import net.minecraft.world.inventory.AbstractContainerMenu;
 import net.minecraft.world.inventory.ClickType;
 import net.minecraft.world.inventory.Slot;
 import net.minecraft.world.item.ItemStack;
+import net.minecraft.world.level.Level;
 import net.monke.abrakadavra.Abrakadavra;
 import net.minecraft.client.gui.screens.inventory.AbstractContainerScreen;
 import net.minecraft.client.renderer.GameRenderer;
@@ -131,6 +133,7 @@ public class RuneTableScreen extends AbstractContainerScreen<RuneTableMenu> {
     @Override
     public void slotClicked(Slot pSlot, int pSlotId, int pMouseButton, ClickType pType) {
         Player player = Minecraft.getInstance().player;
+        Level pLevel = player.level;
         // Check if the clicked slot is a spell slot and the wand is present in the WandSlot
         if (pSlot instanceof SpellSlot && pMouseButton == 0 && runeTableMenu.getSlot(36).hasItem()) {
             ItemStack wandStack = runeTableMenu.getSlot(36).getItem();
@@ -144,6 +147,12 @@ public class RuneTableScreen extends AbstractContainerScreen<RuneTableMenu> {
                         Wand.setSpellAssignedToWand(wandStack, "Ice Bolt");
                         selectedSlot = pSlotId;
                         ModMessages.sendToServer(new IceBoltPacket());
+                        if (player.level.isClientSide()){
+                            for (int i = 0; i < 10 + pLevel.random.nextInt(10)+1; i++) {
+                            pLevel.addParticle(ParticleTypes.SNOWFLAKE, player.getX() + pLevel.random.nextDouble(),
+                                    player.getY() + 1.2D, player.getZ() + 0.3D + pLevel.random.nextDouble(),
+                                    0d, 0.015d + pLevel.random.nextDouble(0.075d), 0d);}
+                        }
                     } else {
                         player.displayClientMessage(new TranslatableComponent("You don't yet know Ice Bolt spell!"), true);
 //                        Minecraft.getInstance().getToasts().addToast(new SystemToast(SystemToast.SystemToastIds.TUTORIAL_HINT,
@@ -158,6 +167,12 @@ public class RuneTableScreen extends AbstractContainerScreen<RuneTableMenu> {
                         Wand.setSpellAssignedToWand(wandStack, "Levitation Blast");
                         selectedSlot = pSlotId;
                         ModMessages.sendToServer(new LevitationPacket());
+                        if (player.level.isClientSide()){
+                            for (int i = 0; i < 10 + pLevel.random.nextInt(10)+1; i++) {
+                                pLevel.addParticle(ParticleTypes.ASH, player.getX() + pLevel.random.nextDouble(),
+                                        player.getY() + 1.2D, player.getZ() + 0.3D + pLevel.random.nextDouble(),
+                                        0d, 0.015d + pLevel.random.nextDouble(0.075d), 0d);}
+                        }
                     } else {
                         player.displayClientMessage(new TranslatableComponent("You don't yet know Levitation Blast spell!"), true);
 //                    Minecraft.getInstance().getToasts().addToast(new SystemToast(SystemToast.SystemToastIds.TUTORIAL_HINT,
@@ -172,6 +187,12 @@ public class RuneTableScreen extends AbstractContainerScreen<RuneTableMenu> {
                         Wand.setSpellAssignedToWand(wandStack, "Summon Demised");
                         selectedSlot = pSlotId;
                         ModMessages.sendToServer(new SummonDemisedPacket());
+                        if (player.level.isClientSide()){
+                            for (int i = 0; i < 10 + pLevel.random.nextInt(10)+1; i++) {
+                                pLevel.addParticle(ParticleTypes.SOUL, player.getX() + pLevel.random.nextDouble(),
+                                        player.getY() + 1.2D, player.getZ() + 0.3D + pLevel.random.nextDouble(),
+                                        0d, 0.015d + pLevel.random.nextDouble(0.075d), 0d);}
+                        }
                     } else {
                     player.displayClientMessage(new TranslatableComponent("You don't yet know Summon Demised spell!"), true);
 //                    Minecraft.getInstance().getToasts().addToast(new SystemToast(SystemToast.SystemToastIds.TUTORIAL_HINT,
@@ -192,6 +213,7 @@ public class RuneTableScreen extends AbstractContainerScreen<RuneTableMenu> {
         super.containerTick();
     if (runeTableMenu.getSlot(36).hasItem()) {
         if (!insertedWandSlot) {
+
             ModMessages.sendToServer(new PlaceWandPacket());
             insertedWandSlot = true;
         }

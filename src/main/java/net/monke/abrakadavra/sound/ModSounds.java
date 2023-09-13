@@ -17,6 +17,11 @@ public class ModSounds {
     public static RegistryObject<SoundEvent> RUNE_TABLE
             = registerSoundEvents("rune_table");
 
+    public static RegistryObject<SoundEvent> ICE_BOLT_CAST
+            = registerSoundEvents("ice_bolt_cast");
+    public static RegistryObject<SoundEvent> ICE_BOLT_IMPACT
+            = registerSoundEvents("ice_bolt_impact");
+
     private static RegistryObject<SoundEvent> registerSoundEvents(String name) {
         ResourceLocation id = new ResourceLocation(Abrakadavra.MOD_ID, name);
         return SOUND_EVENTS.register(name, () -> new SoundEvent(id));

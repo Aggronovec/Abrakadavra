@@ -27,7 +27,7 @@ public class PlaceWandPacket {
             ServerPlayer player = context.getSender();
             ServerLevel level = player.getLevel();
             level.playSound(null, player.getOnPos(), ModSounds.PLACE_WAND.get(), SoundSource.PLAYERS,
-                    level.random.nextFloat() * 0.1F + 0.3F, level.random.nextFloat() * 0.1F + 0.9F);
+                    level.random.nextFloat() * 0.05F + 0.2F, level.random.nextFloat() * 0.1F + 0.9F);
         });
         return true;
     }
