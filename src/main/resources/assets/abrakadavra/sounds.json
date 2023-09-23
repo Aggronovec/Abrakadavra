@@ -28,5 +28,14 @@
     "abrakadavra:ice_bolt_cast_3",
     "abrakadavra:ice_bolt_cast_4"
   ]
+},
+  "fire_bolt_cast": {
+"subtitle": "sounds.abrakadavra.fire_bolt_cast",
+  "sounds": [
+    "abrakadavra:fire_bolt_cast_1",
+    "abrakadavra:fire_bolt_cast_2",
+    "abrakadavra:fire_bolt_cast_3",
+    "abrakadavra:fire_bolt_cast_4"
+  ]
 }
 }

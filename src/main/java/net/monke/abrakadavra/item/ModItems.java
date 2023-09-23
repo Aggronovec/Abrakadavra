@@ -6,10 +6,7 @@ import net.minecraftforge.registries.DeferredRegister;
 import net.minecraftforge.registries.ForgeRegistries;
 import net.minecraftforge.registries.RegistryObject;
 import net.monke.abrakadavra.Abrakadavra;
-import net.monke.abrakadavra.item.function.SummonDemisedSpellScroll;
-import net.monke.abrakadavra.item.function.IceBoltSpellScroll;
-import net.monke.abrakadavra.item.function.LevitationBlastSpellScroll;
-import net.monke.abrakadavra.item.function.Wand;
+import net.monke.abrakadavra.item.function.*;
 
 public class ModItems {
     public static final DeferredRegister<Item> ITEMS =
@@ -19,6 +16,8 @@ public class ModItems {
     public static final RegistryObject<Item> WAND = ITEMS.register("wand", () -> new Wand(new Item.Properties().tab(ModAbrakadavraTab.ABRAKADAVRA_TAB).
             durability(150)));
     public static final RegistryObject<Item> WAND_ICE_BOLT = ITEMS.register("wand_ice_bolt", () -> new Wand(new Item.Properties().tab(ModAbrakadavraTab.ABRAKADAVRA_TAB).
+            durability(150)));
+    public static final RegistryObject<Item> WAND_FIRE_BOLT = ITEMS.register("wand_fire_bolt", () -> new Wand(new Item.Properties().tab(ModAbrakadavraTab.ABRAKADAVRA_TAB).
             durability(150)));
     public static final RegistryObject<Item> WAND_LEVITATION_BLAST = ITEMS.register("wand_levitation_blast", () -> new Wand(new Item.Properties().tab(ModAbrakadavraTab.ABRAKADAVRA_TAB).
             durability(150)));
@@ -33,6 +32,8 @@ public class ModItems {
     public static final RegistryObject<Item> LEVITATION_BLAST_SPELL_SCROLL = ITEMS.register("levitation_blast_spell_scroll", () -> new LevitationBlastSpellScroll(new Item.Properties().tab(ModAbrakadavraTab.ABRAKADAVRA_TAB).
             stacksTo(1)));
     public static final RegistryObject<Item> SUMMON_DEMISED_SPELL_SCROLL = ITEMS.register("summon_demised_spell_scroll", () -> new SummonDemisedSpellScroll(new Item.Properties().tab(ModAbrakadavraTab.ABRAKADAVRA_TAB).
+            stacksTo(1)));
+    public static final RegistryObject<Item> FIRE_BOLT_SPELL_SCROLL = ITEMS.register("fire_bolt_spell_scroll", () -> new FireBoltSpellScroll(new Item.Properties().tab(ModAbrakadavraTab.ABRAKADAVRA_TAB).
             stacksTo(1)));
 
     public static final RegistryObject<Item> SORCERERS_MANUAL = ITEMS.register("sorcerers_manual", () -> new Item(new Item.Properties().tab(ModAbrakadavraTab.ABRAKADAVRA_TAB)));

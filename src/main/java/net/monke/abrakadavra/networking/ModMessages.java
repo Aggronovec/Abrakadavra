@@ -39,6 +39,11 @@ public class ModMessages {
                 .encoder(IceBoltPacket::toBytes)
                 .consumer(IceBoltPacket::handle)
                 .add();
+        net.messageBuilder(FireBoltPacket.class, id(), NetworkDirection.PLAY_TO_SERVER)
+                .decoder(FireBoltPacket::new)
+                .encoder(FireBoltPacket::toBytes)
+                .consumer(FireBoltPacket::handle)
+                .add();
         net.messageBuilder(SummonDemisedPacket.class, id(), NetworkDirection.PLAY_TO_SERVER)
                 .decoder(SummonDemisedPacket::new)
                 .encoder(SummonDemisedPacket::toBytes)
@@ -48,6 +53,11 @@ public class ModMessages {
                 .decoder(IceBoltScrollPacket::new)
                 .encoder(IceBoltScrollPacket::toBytes)
                 .consumer(IceBoltScrollPacket::handle)
+                .add();
+        net.messageBuilder(FireBoltScrollPacket.class, id(), NetworkDirection.PLAY_TO_SERVER)
+                .decoder(FireBoltScrollPacket::new)
+                .encoder(FireBoltScrollPacket::toBytes)
+                .consumer(FireBoltScrollPacket::handle)
                 .add();
         net.messageBuilder(LevitationScrollPacket.class, id(), NetworkDirection.PLAY_TO_SERVER)
                 .decoder(LevitationScrollPacket::new)

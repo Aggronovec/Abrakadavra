@@ -1,10 +1,12 @@
 {
   "item.abrakadavra.wand_handle": "Wand handle",
-  "item.abrakadavra.ice_bolt_spell_scroll": "Spell Scroll of Ice",
-  "item.abrakadavra.levitation_blast_spell_scroll": "Spell Scroll of Air",
-  "item.abrakadavra.summon_demised_spell_scroll": "Spell Scroll of Necromancy",
+  "item.abrakadavra.ice_bolt_spell_scroll": "Spell Scroll of Ice Bolt",
+  "item.abrakadavra.fire_bolt_spell_scroll": "Spell Scroll of Fire Bolt",
+  "item.abrakadavra.levitation_blast_spell_scroll": "Spell Scroll of Levitation Blast",
+  "item.abrakadavra.summon_demised_spell_scroll": "Spell Scroll of Summon Demised",
   "item.abrakadavra.wand": "§dAbrakadavra wand§r",
   "item.abrakadavra.wand_ice_bolt": "§dwand§r of Ice Bolt",
+  "item.abrakadavra.wand_fire_bolt": "§dwand§r of Fire Bolt",
   "item.abrakadavra.wand_levitation_blast": "§dwand§r of Levitation Blast",
   "item.abrakadavra.wand_summon_demised": "§dwand§r of Summon Demised",
   "item.abrakadavra.sorcerers_manual": "Sorcerer's Manual",
@@ -16,6 +18,7 @@
 
   "tooltip.abrakadavra.wand.tooltip": "No spell are assigned to this Wand",
   "tooltip.abrakadavra.wand_ice_bolt.tooltip": "§8Spells assigned to wand:§r Ice Bolt",
+  "tooltip.abrakadavra.wand_fire_bolt.tooltip": "§8Spells assigned to wand:§r Fire Bolt",
   "tooltip.abrakadavra.wand_levitation_blast.tooltip": "§8Spells assigned to wand:§r Levitation Blast",
   "tooltip.abrakadavra.wand_summon_demised.tooltip": "§8Spells assigned to wand:§r Summon Demised"
 }

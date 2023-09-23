@@ -20,6 +20,7 @@ public class CheckSpellPacket {
     public static boolean HasLevitationBlastspell = false;
     public static boolean HasSummonDemisedSpell = false;
     public static boolean HasIceBoltSpell = false;
+    public static boolean HasFireBoltSpell = false;
     public boolean handle (Supplier<NetworkEvent.Context> supplier) {
         NetworkEvent.Context context = supplier.get();
         context.enqueueWork(() -> {
@@ -29,6 +30,8 @@ public class CheckSpellPacket {
             CompoundTag persistentData = playerData.getCompound(LEARNED_SPELLS_KEY);
             if (persistentData.contains("Ice Bolt")) {
                 HasIceBoltSpell = true;}
+            if (persistentData.contains("Fire Bolt")) {
+                HasFireBoltSpell = true;}
             if (persistentData.contains("Levitation Blast")) {
                 HasLevitationBlastspell = true;}
             if (persistentData.contains("Summon Demised")) {

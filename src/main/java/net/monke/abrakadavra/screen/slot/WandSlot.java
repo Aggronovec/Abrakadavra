@@ -14,6 +14,7 @@ public class WandSlot extends SlotItemHandler {
 
         return stack.getItem() == ModItems.WAND.get() ||
          stack.getItem() == ModItems.WAND_ICE_BOLT.get() ||
+         stack.getItem() == ModItems.WAND_FIRE_BOLT.get() ||
          stack.getItem() == ModItems.WAND_LEVITATION_BLAST.get() ||
          stack.getItem() == ModItems.WAND_SUMMON_DEMISED.get();
     }

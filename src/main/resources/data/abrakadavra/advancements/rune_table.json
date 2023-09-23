@@ -20,7 +20,7 @@
   },
   "rewards": {
     "loot": [
-      "abrakadavra:rewards/ice_bolt_spell_scroll"
+      "abrakadavra:rewards/spell_scroll"
     ]
   }
 }

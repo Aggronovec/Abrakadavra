@@ -19,6 +19,8 @@ public class ModSounds {
 
     public static RegistryObject<SoundEvent> ICE_BOLT_CAST
             = registerSoundEvents("ice_bolt_cast");
+    public static RegistryObject<SoundEvent> FIRE_BOLT_CAST
+            = registerSoundEvents("fire_bolt_cast");
     public static RegistryObject<SoundEvent> ICE_BOLT_IMPACT
             = registerSoundEvents("ice_bolt_impact");
 

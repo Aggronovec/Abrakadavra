@@ -12,5 +12,7 @@ public class EntityInit {
 
     public static final RegistryObject<EntityType<IceBoltEntity>> ICE_BOLT_PROJECTILE = ENTITY_TYPES.register("ice_bolt",
             () -> EntityType.Builder.of((EntityType.EntityFactory<IceBoltEntity>) IceBoltEntity::new, MobCategory.MISC).sized(0.5F, 0.5F).build("ice_bolt"));
+    public static final RegistryObject<EntityType<FireBoltEntity>> FIRE_BOLT_PROJECTILE = ENTITY_TYPES.register("fire_bolt",
+            () -> EntityType.Builder.of((EntityType.EntityFactory<FireBoltEntity>) FireBoltEntity::new, MobCategory.MISC).sized(0.5F, 0.5F).build("fire_bolt"));
 }
 

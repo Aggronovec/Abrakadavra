@@ -16,13 +16,17 @@
       "trigger": "minecraft:tick",
       "conditions": {
         "player": {
-
-          "nbt": "{LearnedSpells:{\"Ice_Bolt\":1b}}"
-        }
+          "player": {},
+          "effects": {
+            "abrakadavra:wizard": {
+              "amplifier": 0
+            }
+          }
+          }
       }
     }
   },
   "rewards": {
-    "experience": 1000
+    "experience": 10000
   }
 }

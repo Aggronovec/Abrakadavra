@@ -73,7 +73,7 @@ public class RuneTableScreen extends AbstractContainerScreen<RuneTableMenu> {
             ItemStack wandStack = runeTableMenu.getSlot(36).getItem();
             if (wandStack.getItem() == ModItems.WAND.get()) {
                 // Handle the wand highlight here
-            } else if (wandStack.getItem() == ModItems.WAND_ICE_BOLT.get()) {
+            } else if (wandStack.getItem() == ModItems.WAND_FIRE_BOLT.get()) {
                 selectedSlot = 37;
 //                renderSlotHighlight(pPoseStack, x + 205, y + 88 + 19 * 0); // First slot
             } else if (wandStack.getItem() == ModItems.WAND_LEVITATION_BLAST.get()) {
@@ -95,11 +95,11 @@ public class RuneTableScreen extends AbstractContainerScreen<RuneTableMenu> {
                     break;
             }
 
-            if (CheckSpellPacket.HasIceBoltSpell) {
-                setTexture(new ResourceLocation(Abrakadavra.MOD_ID, "textures/gui/spell_icons/ice_bolt.png"));
+            if (CheckSpellPacket.HasFireBoltSpell) {
+                setTexture(new ResourceLocation(Abrakadavra.MOD_ID, "textures/gui/spell_icons/fire_bolt.png"));
                 this.blit(pPoseStack, x + 205, y + 88, 0, 0, 16, 16, 16, 16);
             } else {
-                setTexture(new ResourceLocation(Abrakadavra.MOD_ID, "textures/gui/spell_icons/ice_bolt_locked.png"));
+                setTexture(new ResourceLocation(Abrakadavra.MOD_ID, "textures/gui/spell_icons/fire_bolt_locked.png"));
                 this.blit(pPoseStack, x + 205, y + 88, 0, 0, 16, 16, 16, 16);
             }
 
@@ -140,16 +140,16 @@ public class RuneTableScreen extends AbstractContainerScreen<RuneTableMenu> {
             // Determine the spell name based on the slotId
             switch (pSlotId) {
                 case 37:
-                    if (CheckSpellPacket.HasIceBoltSpell) {
-                        player.displayClientMessage(new TranslatableComponent("Ice Bolt was infused!"), true);
+                    if (CheckSpellPacket.HasFireBoltSpell) {
+                        player.displayClientMessage(new TranslatableComponent("Fire Bolt was infused!"), true);
 //                        Minecraft.getInstance().getToasts().addToast(new SystemToast(SystemToast.SystemToastIds.TUTORIAL_HINT,
 //                                new TranslatableComponent("Ice Bolt was infused!"), new TranslatableComponent("")));
-                        Wand.setSpellAssignedToWand(wandStack, "Ice Bolt");
+                        Wand.setSpellAssignedToWand(wandStack, "Fire Bolt");
                         selectedSlot = pSlotId;
-                        ModMessages.sendToServer(new IceBoltPacket());
+                        ModMessages.sendToServer(new FireBoltPacket());
                         if (player.level.isClientSide()){
                             for (int i = 0; i < 10 + pLevel.random.nextInt(10)+1; i++) {
-                            pLevel.addParticle(ParticleTypes.SNOWFLAKE, player.getX() + pLevel.random.nextDouble(),
+                            pLevel.addParticle(ParticleTypes.CAMPFIRE_SIGNAL_SMOKE, player.getX() + pLevel.random.nextDouble(),
                                     player.getY() + 1.2D, player.getZ() + 0.3D + pLevel.random.nextDouble(),
                                     0d, 0.015d + pLevel.random.nextDouble(0.075d), 0d);}
                         }
