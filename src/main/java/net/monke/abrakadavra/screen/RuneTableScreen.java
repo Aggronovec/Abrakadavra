@@ -13,6 +13,7 @@ import net.minecraft.world.inventory.ClickType;
 import net.minecraft.world.inventory.Slot;
 import net.minecraft.world.item.ItemStack;
 import net.minecraft.world.level.Level;
+import net.minecraft.world.phys.Vec3;
 import net.monke.abrakadavra.Abrakadavra;
 import net.minecraft.client.gui.screens.inventory.AbstractContainerScreen;
 import net.minecraft.client.renderer.GameRenderer;
@@ -134,6 +135,11 @@ public class RuneTableScreen extends AbstractContainerScreen<RuneTableMenu> {
     public void slotClicked(Slot pSlot, int pSlotId, int pMouseButton, ClickType pType) {
         Player player = Minecraft.getInstance().player;
         Level pLevel = player.level;
+        Vec3 lookVec = player.getLookAngle();
+// Calculate the position for the particle
+        double offsetX = 0.5 * lookVec.x; // 0.5 blocks in front
+        double offsetY = player.getY() + 0.2D + pLevel.random.nextDouble(0.8);
+        double offsetZ = 0.5 * lookVec.z; // 0.5 blocks in front
         // Check if the clicked slot is a spell slot and the wand is present in the WandSlot
         if (pSlot instanceof SpellSlot && pMouseButton == 0 && runeTableMenu.getSlot(36).hasItem()) {
             ItemStack wandStack = runeTableMenu.getSlot(36).getItem();
@@ -149,8 +155,7 @@ public class RuneTableScreen extends AbstractContainerScreen<RuneTableMenu> {
                         ModMessages.sendToServer(new FireBoltPacket());
                         if (player.level.isClientSide()){
                             for (int i = 0; i < 10 + pLevel.random.nextInt(10)+1; i++) {
-                            pLevel.addParticle(ParticleTypes.CAMPFIRE_SIGNAL_SMOKE, player.getX() + pLevel.random.nextDouble(),
-                                    player.getY() + 1.2D, player.getZ() + 0.3D + pLevel.random.nextDouble(),
+                            pLevel.addParticle(ParticleTypes.FLAME, player.getX() + offsetX, offsetY, player.getZ() + offsetZ,
                                     0d, 0.015d + pLevel.random.nextDouble(0.075d), 0d);}
                         }
                     } else {
@@ -169,8 +174,7 @@ public class RuneTableScreen extends AbstractContainerScreen<RuneTableMenu> {
                         ModMessages.sendToServer(new LevitationPacket());
                         if (player.level.isClientSide()){
                             for (int i = 0; i < 10 + pLevel.random.nextInt(10)+1; i++) {
-                                pLevel.addParticle(ParticleTypes.ASH, player.getX() + pLevel.random.nextDouble(),
-                                        player.getY() + 1.2D, player.getZ() + 0.3D + pLevel.random.nextDouble(),
+                                pLevel.addParticle(ParticleTypes.SMOKE, player.getX() + offsetX, offsetY, player.getZ() + offsetZ,
                                         0d, 0.015d + pLevel.random.nextDouble(0.075d), 0d);}
                         }
                     } else {
@@ -189,8 +193,7 @@ public class RuneTableScreen extends AbstractContainerScreen<RuneTableMenu> {
                         ModMessages.sendToServer(new SummonDemisedPacket());
                         if (player.level.isClientSide()){
                             for (int i = 0; i < 10 + pLevel.random.nextInt(10)+1; i++) {
-                                pLevel.addParticle(ParticleTypes.SOUL, player.getX() + pLevel.random.nextDouble(),
-                                        player.getY() + 1.2D, player.getZ() + 0.3D + pLevel.random.nextDouble(),
+                                pLevel.addParticle(ParticleTypes.SOUL, player.getX() + offsetX, offsetY, player.getZ() + offsetZ,
                                         0d, 0.015d + pLevel.random.nextDouble(0.075d), 0d);}
                         }
                     } else {

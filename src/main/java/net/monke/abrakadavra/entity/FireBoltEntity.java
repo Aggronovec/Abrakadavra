@@ -1,5 +1,6 @@
 package net.monke.abrakadavra.entity;
 
+import net.minecraft.client.particle.WaterDropParticle;
 import net.minecraft.core.particles.ParticleTypes;
 import net.minecraft.network.protocol.Packet;
 import net.minecraft.server.level.ServerPlayer;
@@ -11,11 +12,15 @@ import net.minecraft.world.entity.projectile.AbstractArrow;
 import net.minecraft.world.item.ItemStack;
 import net.minecraft.world.level.Explosion;
 import net.minecraft.world.level.Level;
+import net.minecraft.world.level.block.Block;
+import net.minecraft.world.level.block.Blocks;
 import net.minecraft.world.level.block.state.BlockState;
+import net.minecraft.world.level.material.WaterFluid;
 import net.minecraft.world.phys.AABB;
 import net.minecraft.world.phys.BlockHitResult;
 import net.minecraft.world.phys.EntityHitResult;
 import net.minecraft.world.phys.Vec3;
+import net.minecraftforge.fluids.FluidAttributes;
 import net.minecraftforge.network.NetworkHooks;
 import net.monke.abrakadavra.sound.ModSounds;
 
@@ -33,7 +38,8 @@ public class FireBoltEntity extends AbstractArrow {
     private static final double PROJECTILE_SPEED = 1.8; // Adjust the speed as needed
     private double distanceTraveled = 0.0; // Track the distance traveled
     public FireBoltEntity(EntityType<FireBoltEntity> entityType, Level world) {
-        super(entityType, world);}
+        super(entityType, world);
+    }
 
     public FireBoltEntity(EntityType<FireBoltEntity> entityType, LivingEntity shooter, Level world) {
         super(entityType, shooter, world);
@@ -56,18 +62,25 @@ public class FireBoltEntity extends AbstractArrow {
         // this, x, y, z, explosionStrength, setsFires, breakMode
        this.level.explode(this, this.getX(), this.getY(), this.getZ(), 3.0f, true, Explosion.BlockInteraction.BREAK);
     }
+
     @Override
     protected void onHitBlock(BlockHitResult ray) {
 //        super.onHitBlock(ray);
-        BlockState theBlockYouHit = this.level.getBlockState(ray.getBlockPos());
-        this.level.explode(this, this.getX(), this.getY(), this.getZ(), 2.0f, true, Explosion.BlockInteraction.BREAK);
-
+        BlockState hitBlockState = this.level.getBlockState(ray.getBlockPos());
+        Block hitBlock = hitBlockState.getBlock();
+            this.level.explode(this, this.getX(), this.getY(), this.getZ(), 2.0f, true, Explosion.BlockInteraction.BREAK);
 //        this.level.playSound(null, this.getX(), this.getY(), this.getZ(), ModSounds.ICE_BOLT_IMPACT.get(), SoundSource.PLAYERS,
 //                level.random.nextFloat() * 0.5F + 0.9F, level.random.nextFloat() * 0.1F + 0.9F);
-        this.discard();
-    }
+            this.discard();
+        }
+
     @Override
     protected void tickDespawn() {
+        if (this.isInWater()) {
+            this.level.playSound(null, this.getX(), this.getY(), this.getZ(), ModSounds.FIRE_BOLT_IN_WATER.get(), SoundSource.PLAYERS,
+                    level.random.nextFloat() * 0.035F + 0.15F, level.random.nextFloat() * 0.6F + 0.9F);
+            this.discard();
+        }
 //        if (this.inGroundTime > 60){
 //            this.level.explode(this, this.getX(), this.getY(), this.getZ(), 4.0f, true, Explosion.BlockInteraction.BREAK);
 //            this.discard();
@@ -99,7 +112,7 @@ public class FireBoltEntity extends AbstractArrow {
                 double particleY = this.getY() + this.getDeltaMovement().y * i;
                 double particleZ = this.getZ() + this.getDeltaMovement().z * i;
 
-                // Spawn a snowflake particle at the calculated position
+                // Spawn a particle at the calculated position
                 this.level.addParticle(ParticleTypes.CAMPFIRE_COSY_SMOKE, particleX, particleY, particleZ, 0, 0.08 + this.level.random.nextDouble(0.8), 0);
                 this.level.addParticle(ParticleTypes.FLAME, particleX, particleY, particleZ, 0, 0.08 + this.level.random.nextDouble(0.8), 0);
             }

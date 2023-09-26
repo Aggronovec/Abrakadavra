@@ -37,5 +37,12 @@
     "abrakadavra:fire_bolt_cast_3",
     "abrakadavra:fire_bolt_cast_4"
   ]
+},
+  "fire_bolt_in_water": {
+"subtitle": "sounds.abrakadavra.fire_bolt_in_water",
+  "sounds": [
+    "abrakadavra:fire_bolt_in_water_1",
+    "abrakadavra:fire_bolt_in_water_2"
+  ]
 }
 }

@@ -11,6 +11,7 @@ import net.minecraft.world.entity.player.Player;
 import net.minecraft.world.item.Item;
 import net.minecraft.world.item.ItemStack;
 import net.minecraft.world.item.TooltipFlag;
+import net.minecraft.world.item.UseAnim;
 import net.minecraft.world.item.context.UseOnContext;
 import net.minecraft.world.level.Level;
 import net.minecraft.world.phys.Vec3;
@@ -72,11 +73,18 @@ public class Wand extends Item {
     }
 
     @Override
+    public int getUseDuration(ItemStack pStack) {
+        return 20;
+    }
+    @Override
+    public UseAnim getUseAnimation(ItemStack pStack) {
+        return UseAnim.BOW;
+    }
+    @Override
     public InteractionResultHolder<ItemStack> use(Level pLevel, Player pPlayer, InteractionHand pUsedHand) {
         ItemStack heldItem = pPlayer.getItemInHand(pUsedHand);
         // Get the player's look vector
         Vec3 lookVec = pPlayer.getLookAngle();
-
 
 // Calculate the position for the particle
         double offsetX = 0.5 * lookVec.x; // 0.5 blocks in front
@@ -111,5 +119,4 @@ public class Wand extends Item {
         }
         return super.use(pLevel, pPlayer, pUsedHand);
     }
-
 }
