@@ -1,132 +1,128 @@
 package net.monke.abrakadavra.entity;
 
 import net.minecraft.core.particles.ParticleTypes;
-import net.minecraft.sounds.SoundEvent;
-import net.minecraft.sounds.SoundEvents;
+import net.minecraft.network.protocol.Packet;
+import net.minecraft.server.level.ServerPlayer;
 import net.minecraft.sounds.SoundSource;
-import net.minecraft.world.damagesource.DamageSource;
+import net.minecraft.world.effect.MobEffectInstance;
+import net.minecraft.world.effect.MobEffects;
 import net.minecraft.world.entity.Entity;
 import net.minecraft.world.entity.EntityType;
 import net.minecraft.world.entity.LivingEntity;
-import net.minecraft.world.entity.projectile.Projectile;
+import net.minecraft.world.entity.projectile.AbstractArrow;
+import net.minecraft.world.item.ItemStack;
+import net.minecraft.world.level.Explosion;
 import net.minecraft.world.level.Level;
-import net.minecraft.world.phys.HitResult;
+import net.minecraft.world.level.block.Block;
+import net.minecraft.world.level.block.state.BlockState;
+import net.minecraft.world.phys.AABB;
+import net.minecraft.world.phys.BlockHitResult;
+import net.minecraft.world.phys.EntityHitResult;
 import net.minecraft.world.phys.Vec3;
-import net.monke.abrakadavra.util.SpellsUtil;
-import net.minecraft.world.damagesource.IndirectEntityDamageSource;
+import net.minecraftforge.network.NetworkHooks;
+import net.monke.abrakadavra.sound.ModSounds;
 
-import javax.annotation.Nullable;
-import java.util.Optional;
+public class LevitationBallEntity extends AbstractArrow {
 
-public class LevitationBallEntity extends SpellAbstractProjectile {
-    public LevitationBallEntity(EntityType<? extends Projectile> pEntityType, Level pLevel) {
-        super(pEntityType, pLevel);
+    private static final double MAX_DISTANCE = 100.0; // Maximum travel distance in blocks
+    private static final double PROJECTILE_SPEED = 1.2; // Adjust the speed as needed
+    private double distanceTraveled = 0.0; // Track the distance traveled
+    public LevitationBallEntity(EntityType<LevitationBallEntity> entityType, Level world) {
+        super(entityType, world);
     }
 
-    public LevitationBallEntity(Level level, LivingEntity shooter) {
-        this(EntityInit.LEVITATION_BALL.get(), level);
-        setOwner(shooter);
+    public LevitationBallEntity(EntityType<LevitationBallEntity> entityType, LivingEntity shooter, Level world) {
+        super(entityType, shooter, world);
+        // Disable gravity for the projectile
+        this.setNoGravity(false);
+        this.level.playSound(null, this.getX(), this.getY(), this.getZ(), ModSounds.LEVITATION_BLAST_CAST.get(), SoundSource.PLAYERS,
+                level.random.nextFloat() * 0.05F + 0.19F, level.random.nextFloat() * 0.6F + 0.9F);
     }
-
     @Override
-    public void trailParticles() {
-        Vec3 vec3 = getDeltaMovement();
-        double d0 = this.getX() - vec3.x;
-        double d1 = this.getY() - vec3.y;
-        double d2 = this.getZ() - vec3.z;
-        for (int i = 0; i < 4; i++) {
-            Vec3 random = SpellsUtil.getRandomVec3(.2);
-            this.level.addParticle(ParticleTypes.SMOKE, d0 - random.x, d1 + 0.5D - random.y, d2 - random.z, random.x * .5f, random.y * .5f, random.z * .5f);
+    protected ItemStack getPickupItem() {
+        return ItemStack.EMPTY;
+    }
+    @Override
+    protected void onHitEntity(EntityHitResult ray) {
+//        super.onHitEntity(ray);
+        this.setBaseDamage(0);
+        Entity target = ray.getEntity();
+        // Dispose of the projectile
+        this.discard();
+        if (target instanceof LivingEntity) {
+            LivingEntity livingEntity = (LivingEntity) target;
+            // Apply your custom freeze effect to the target for 15 seconds (20 ticks per second)
+            livingEntity.addEffect(new MobEffectInstance(MobEffects.LEVITATION, 15 * 20, 0)); // Adjust the duration and amplifier as needed
+            this.level.playSound(null, this.getX(), this.getY(), this.getZ(), ModSounds.LEVITATION_BALL_IMPACT.get(), SoundSource.PLAYERS, 0.8f, level.random.nextFloat() * 0.6F + 0.9F);
         }
+        // this, x, y, z, explosionStrength, setsFires, breakMode
+//       this.level.explode(this, this.getX(), this.getY(), this.getZ(), 3.0f, true, Explosion.BlockInteraction.BREAK);
     }
 
     @Override
-    public void impactParticles(double x, double y, double z) {
-        SpellsUtil.spawnParticles(level, ParticleTypes.LAVA, x, y, z, 30, 1.5, .1, 1.5, 1, false);
-    }
-
+    protected void onHitBlock(BlockHitResult ray) {
+//        super.onHitBlock(ray);
+        BlockState hitBlockState = this.level.getBlockState(ray.getBlockPos());
+        Block hitBlock = hitBlockState.getBlock();
+//            this.level.explode(this, this.getX(), this.getY(), this.getZ(), 2.0f, true, Explosion.BlockInteraction.BREAK);
+//        this.level.playSound(null, this.getX(), this.getY(), this.getZ(), ModSounds.ICE_BOLT_IMPACT.get(), SoundSource.PLAYERS,
+//                level.random.nextFloat() * 0.5F + 0.9F, level.random.nextFloat() * 0.1F + 0.9F);
+            this.discard();
+        }
+        
     @Override
-    public boolean respectsGravity() {
-        return true;
+    public Packet<?> getAddEntityPacket() {
+        return NetworkHooks.getEntitySpawningPacket(this);
     }
-
     @Override
-    public float getSpeed() {
-        return .65f;
-    }
+    public void tick() {
+        // Update the entity's position based on the direction to the crosshair position
+        if (this.tickCount == 1 && this.getOwner() instanceof ServerPlayer) {
+            ServerPlayer serverPlayer = (ServerPlayer) this.getOwner();
+            Vec3 crosshairPos = serverPlayer.getLookAngle();
+            Vec3 motion = crosshairPos.normalize().scale(PROJECTILE_SPEED); // Adjust the scale as needed
+            this.setDeltaMovement(motion.x, motion.y, motion.z);
+        }
+        if (this.isInWaterOrBubble()) {
+            this.level.playSound(null, this.getX(), this.getY(), this.getZ(), ModSounds.FIRE_BOLT_IN_WATER.get(), SoundSource.PLAYERS,
+                    level.random.nextFloat() * 0.035F + 0.15F, level.random.nextFloat() * 0.6F + 0.9F);
+            this.remove(RemovalReason.DISCARDED);
+        }
+        // Spawn particles along the trajectory
+        if (this.level.isClientSide()) {
+            // Calculate the number of particles based on the distance traveled
+            int numParticles = (int) this.distanceTraveled / 5; // Adjust the interval as needed
 
-    @Override
-    protected void onHit(HitResult hitresult) {
-        super.onHit(hitresult);
-//        createLevitationArea(hitresult.getLocation());
-        float explosionRadius = getExplosionRadius();
-        var entities = level.getEntities(this, this.getBoundingBox().inflate(explosionRadius));
-        for (Entity entity : entities) {
-            double distance = entity.distanceToSqr(hitresult.getLocation());
-            if (distance < explosionRadius * explosionRadius && canHitEntity(entity)) {
-                if (SpellsUtil.hasLineOfSight(level, hitresult.getLocation(), entity.position().add(0, entity.getEyeHeight() * .5f, 0))) {
-                    double p = (1 - Math.pow(Math.sqrt(distance) / (explosionRadius), 3));
-                    float damage = (float) (this.damage * p);
-                    applyDamage(entity, damage, indirectDamageSource(this, getOwner()));
-                }
+            for (int i = 0; i < numParticles; i++) {
+                // Calculate the position for the particle
+                double particleX = this.getX() + this.getDeltaMovement().x * i;
+                double particleY = this.getY() + this.getDeltaMovement().y * i;
+                double particleZ = this.getZ() + this.getDeltaMovement().z * i;
+
+                // Spawn a particle at the calculated position
+                this.level.addParticle(ParticleTypes.WHITE_ASH, particleX, particleY, particleZ, 0, 0.08 + this.level.random.nextDouble(0.8), 0);
+                this.level.addParticle(ParticleTypes.SOUL, particleX, particleY, particleZ, 0, 0.08 + this.level.random.nextDouble(0.8), 0);
             }
         }
-        discard();
-    }
+        // Update the distance traveled
+        this.distanceTraveled += this.getDeltaMovement().length();
+        if (this.distanceTraveled >= MAX_DISTANCE) {
+            // Dispose of the projectile if it reaches the maximum distance
+            this.discard(); }
 
-    public DamageSource indirectDamageSource(Entity projectile, @Nullable Entity attacker) {
-        return new IndirectEntityDamageSource("air_damage", projectile, attacker);
-    }
-
-//    public void createLevitationArea(Vec3 location) {
-//        if (!level.isClientSide) {
-//            FireField fire = new FireField(level);
-//            fire.setOwner(getOwner());
-//            fire.setDuration(200);
-//            fire.setDamage(damage / 5);
-//            fire.setRadius(getExplosionRadius());
-//            fire.setCircular();
-//            fire.moveTo(location);
-//            level.addFreshEntity(fire);
-//        }
-//    }
-
-    @Override
-    protected void doImpactSound(SoundEvent sound) {
-        level.playSound(null, getX(), getY(), getZ(), sound, SoundSource.NEUTRAL, 2, 1.2f + level.random.nextFloat() * .2f);
+        // Call super.tick() for other functionality
+        super.tick();
     }
 
     @Override
-    public Optional<SoundEvent> getImpactSound() {
-        return Optional.of(SoundEvents.GENERIC_EXPLODE);
+    public void setBaseDamage(double pDamage) {
+        pDamage = 0;
+        super.setBaseDamage(pDamage);
     }
-    public static boolean applyDamage(Entity target, float baseAmount, DamageSource damageSource) {
-        if (target instanceof LivingEntity livingTarget) {
+    @Override
+    protected AABB makeBoundingBox() {
 
-            float adjustedDamage = baseAmount;
-            boolean fromSummon = false;
-
-            if (damageSource.getEntity() instanceof LivingEntity livingAttacker) {
-                if (isFriendlyFireBetween(livingAttacker, livingTarget))
-                    return false;
-                livingAttacker.setLastHurtMob(target);
-            }
-            var flag = livingTarget.hurt(damageSource, adjustedDamage);
-            if (fromSummon)
-                livingTarget.setLastHurtByMob((LivingEntity) damageSource.getDirectEntity());
-            return flag;
-        } else {
-            return target.hurt(damageSource, baseAmount);
-        }
-
+        return super.makeBoundingBox().inflate(2);
     }
-    public static boolean isFriendlyFireBetween(Entity attacker, Entity target) {
-        if (attacker == null || target == null)
-            return false;
-        var team = attacker.getTeam();
-        if (team != null) {
-            return team.isAlliedTo(target.getTeam()) && !team.isAllowFriendlyFire();
-        }
-        return false;
-    }
+
 }

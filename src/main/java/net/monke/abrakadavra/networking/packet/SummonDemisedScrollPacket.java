@@ -10,7 +10,10 @@ import net.minecraft.server.level.ServerPlayer;
 import net.minecraft.sounds.SoundEvents;
 import net.minecraft.sounds.SoundSource;
 import net.minecraft.world.InteractionHand;
+import net.minecraft.world.effect.MobEffectInstance;
 import net.minecraftforge.network.NetworkEvent;
+import net.monke.abrakadavra.effect.ModEffects;
+import net.monke.abrakadavra.util.AdvancementUtil;
 
 import java.util.function.Supplier;
 
@@ -48,6 +51,9 @@ public class SummonDemisedScrollPacket {
                 player.getInventory().removeItem(player.getItemInHand(InteractionHand.MAIN_HAND));
                 level.playSound(null, player.getOnPos(), SoundEvents.BOOK_PAGE_TURN, SoundSource.PLAYERS,
                         0.8F, level.random.nextFloat() * 0.1F + 0.9F);
+                if (AdvancementUtil.TestForWizard(player, persistentData)) {
+                    player.addEffect(new MobEffectInstance(ModEffects.WIZARD.get(), 30 * 20, 0));
+                }
             }
         });
         return true;

@@ -8,6 +8,7 @@ import net.minecraftforge.fml.event.lifecycle.FMLClientSetupEvent;
 import net.monke.abrakadavra.Abrakadavra;
 import net.monke.abrakadavra.client.render.IceBoltRendered;
 import net.monke.abrakadavra.client.render.FireBoltRendered;
+import net.monke.abrakadavra.client.render.LevitationBallRendered;
 import net.monke.abrakadavra.entity.EntityInit;
 
 
@@ -17,6 +18,7 @@ import net.monke.abrakadavra.entity.EntityInit;
         public static void doSetup(FMLClientSetupEvent event) {
             EntityRenderers.register(EntityInit.ICE_BOLT_PROJECTILE.get(), IceBoltRendered::new);
             EntityRenderers.register(EntityInit.FIRE_BOLT_PROJECTILE.get(), FireBoltRendered::new);
+            EntityRenderers.register(EntityInit.LEVITATION_BALL_PROJECTILE.get(), LevitationBallRendered::new);
         }
     }
 

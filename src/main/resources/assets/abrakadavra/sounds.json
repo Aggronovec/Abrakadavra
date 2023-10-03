@@ -19,6 +19,14 @@
 "abrakadavra:ice_bolt_impact"
 ]
 },
+  "levitation_ball_impact": {
+"subtitle": "sounds.abrakadavra.levitation_ball_impact",
+"sounds": [
+"abrakadavra:levitation_ball_impact_1",
+"abrakadavra:levitation_ball_impact_2",
+"abrakadavra:levitation_ball_impact_3"
+]
+},
 
 "ice_bolt_cast": {
 "subtitle": "sounds.abrakadavra.ice_bolt_cast",
@@ -29,7 +37,17 @@
     "abrakadavra:ice_bolt_cast_4"
   ]
 },
-  "fire_bolt_cast": {
+  "levitation_blast_cast": {
+"subtitle": "sounds.abrakadavra.fire_bolt_cast",
+  "sounds": [
+    "abrakadavra:levitation_blast_cast_1",
+    "abrakadavra:levitation_blast_cast_2",
+    "abrakadavra:levitation_blast_cast_3",
+    "abrakadavra:levitation_blast_cast_4",
+    "abrakadavra:levitation_blast_cast_5"
+  ]
+},
+   "fire_bolt_cast": {
 "subtitle": "sounds.abrakadavra.fire_bolt_cast",
   "sounds": [
     "abrakadavra:fire_bolt_cast_1",

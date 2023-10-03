@@ -174,7 +174,7 @@ public class RuneTableScreen extends AbstractContainerScreen<RuneTableMenu> {
                         ModMessages.sendToServer(new LevitationPacket());
                         if (player.level.isClientSide()){
                             for (int i = 0; i < 10 + pLevel.random.nextInt(10)+1; i++) {
-                                pLevel.addParticle(ParticleTypes.SMOKE, player.getX() + offsetX, offsetY, player.getZ() + offsetZ,
+                                pLevel.addParticle(ParticleTypes.CAMPFIRE_COSY_SMOKE, player.getX() + offsetX, offsetY, player.getZ() + offsetZ,
                                         0d, 0.015d + pLevel.random.nextDouble(0.075d), 0d);}
                         }
                     } else {

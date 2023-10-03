@@ -13,14 +13,11 @@ import net.minecraft.world.item.ItemStack;
 import net.minecraft.world.level.Explosion;
 import net.minecraft.world.level.Level;
 import net.minecraft.world.level.block.Block;
-import net.minecraft.world.level.block.Blocks;
 import net.minecraft.world.level.block.state.BlockState;
-import net.minecraft.world.level.material.WaterFluid;
 import net.minecraft.world.phys.AABB;
 import net.minecraft.world.phys.BlockHitResult;
 import net.minecraft.world.phys.EntityHitResult;
 import net.minecraft.world.phys.Vec3;
-import net.minecraftforge.fluids.FluidAttributes;
 import net.minecraftforge.network.NetworkHooks;
 import net.monke.abrakadavra.sound.ModSounds;
 
@@ -73,20 +70,7 @@ public class FireBoltEntity extends AbstractArrow {
 //                level.random.nextFloat() * 0.5F + 0.9F, level.random.nextFloat() * 0.1F + 0.9F);
             this.discard();
         }
-
-    @Override
-    protected void tickDespawn() {
-        if (this.isInWater()) {
-            this.level.playSound(null, this.getX(), this.getY(), this.getZ(), ModSounds.FIRE_BOLT_IN_WATER.get(), SoundSource.PLAYERS,
-                    level.random.nextFloat() * 0.035F + 0.15F, level.random.nextFloat() * 0.6F + 0.9F);
-            this.discard();
-        }
-//        if (this.inGroundTime > 60){
-//            this.level.explode(this, this.getX(), this.getY(), this.getZ(), 4.0f, true, Explosion.BlockInteraction.BREAK);
-//            this.discard();
-//        }
-            this.discard();
-    }
+        
     @Override
     public Packet<?> getAddEntityPacket() {
         return NetworkHooks.getEntitySpawningPacket(this);
@@ -100,7 +84,11 @@ public class FireBoltEntity extends AbstractArrow {
             Vec3 motion = crosshairPos.normalize().scale(PROJECTILE_SPEED); // Adjust the scale as needed
             this.setDeltaMovement(motion.x, motion.y, motion.z);
         }
-
+        if (this.isInWaterOrBubble()) {
+            this.level.playSound(null, this.getX(), this.getY(), this.getZ(), ModSounds.FIRE_BOLT_IN_WATER.get(), SoundSource.PLAYERS,
+                    level.random.nextFloat() * 0.035F + 0.15F, level.random.nextFloat() * 0.6F + 0.9F);
+            this.remove(RemovalReason.DISCARDED);
+        }
         // Spawn particles along the trajectory
         if (this.level.isClientSide()) {
             // Calculate the number of particles based on the distance traveled

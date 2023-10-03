@@ -26,6 +26,8 @@ public class ModItems {
             durability(150)));
     public static final RegistryObject<Item> WAND_HANDLE = ITEMS.register("wand_handle", () -> new Item(new Item.Properties().tab(ModAbrakadavraTab.ABRAKADAVRA_TAB).
             stacksTo(4)));
+    public static final RegistryObject<Item> WIZARD_HAT = ITEMS.register("wizard_hat", () -> new Item(new Item.Properties().tab(ModAbrakadavraTab.ABRAKADAVRA_TAB).
+            stacksTo(1)));
 
     //SPELL SCROLLS
     public static final RegistryObject<Item> ICE_BOLT_SPELL_SCROLL = ITEMS.register("ice_bolt_spell_scroll", () -> new IceBoltSpellScroll(new Item.Properties().tab(ModAbrakadavraTab.ABRAKADAVRA_TAB).

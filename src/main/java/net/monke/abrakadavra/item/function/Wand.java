@@ -5,19 +5,18 @@ import net.minecraft.nbt.CompoundTag;
 import net.minecraft.network.chat.Component;
 import net.minecraft.network.chat.TranslatableComponent;
 import net.minecraft.world.InteractionHand;
-import net.minecraft.world.InteractionResult;
 import net.minecraft.world.InteractionResultHolder;
 import net.minecraft.world.entity.player.Player;
 import net.minecraft.world.item.Item;
 import net.minecraft.world.item.ItemStack;
 import net.minecraft.world.item.TooltipFlag;
 import net.minecraft.world.item.UseAnim;
-import net.minecraft.world.item.context.UseOnContext;
 import net.minecraft.world.level.Level;
 import net.minecraft.world.phys.Vec3;
 import net.monke.abrakadavra.entity.EntityInit;
 import net.monke.abrakadavra.entity.FireBoltEntity;
 import net.monke.abrakadavra.entity.IceBoltEntity;
+import net.monke.abrakadavra.entity.LevitationBallEntity;
 import net.monke.abrakadavra.item.ModItems;
 import org.jetbrains.annotations.Nullable;
 
@@ -94,24 +93,36 @@ public class Wand extends Item {
 
                 if (heldItem.getItem() == ModItems.WAND_FIRE_BOLT.get()) {
                     FireBoltEntity arrow = new FireBoltEntity(EntityInit.FIRE_BOLT_PROJECTILE.get(), pPlayer, pPlayer.level);
-                    arrow.setDeltaMovement(0, 1, 0); // directly up
+                    arrow.setDeltaMovement(lookVec.x, lookVec.y, lookVec.z); // Use the player's look vector
+                    pPlayer.level.addFreshEntity(arrow);
+                }
+                if (heldItem.getItem() == ModItems.WAND_LEVITATION_BLAST.get()) {
+                    LevitationBallEntity arrow = new LevitationBallEntity(EntityInit.LEVITATION_BALL_PROJECTILE.get(), pPlayer, pPlayer.level);
+                    arrow.setDeltaMovement(lookVec.x, lookVec.y, lookVec.z); // Use the player's look vector
                     pPlayer.level.addFreshEntity(arrow);
                 }
                 if (heldItem.getItem() == ModItems.WAND_ICE_BOLT.get()) {
                     IceBoltEntity arrow = new IceBoltEntity(EntityInit.ICE_BOLT_PROJECTILE.get(), pPlayer, pPlayer.level);
-                    arrow.setDeltaMovement(0, 1, 0); // directly up
+                    arrow.setDeltaMovement(lookVec.x, lookVec.y, lookVec.z); // Use the player's look vector
                     pPlayer.level.addFreshEntity(arrow);
                 }
         } else {
             if (heldItem.getItem() == ModItems.WAND_FIRE_BOLT.get()) {
                 for (int i = 0; i < 12; i++) {
-                    pLevel.addParticle(ParticleTypes.CAMPFIRE_SIGNAL_SMOKE, pPlayer.getX() + offsetX, offsetY, pPlayer.getZ() + offsetZ,
+                    pLevel.addParticle(ParticleTypes.FLAME, pPlayer.getX() + offsetX, offsetY, pPlayer.getZ() + offsetZ,
                             0d, 0.015d + pLevel.random.nextDouble(0.075d), 0d);
                 }
             }
             if (heldItem.getItem() == ModItems.WAND_ICE_BOLT.get()) {
                 for (int i = 0; i < 10; i++) {
                     pLevel.addParticle(ParticleTypes.SNOWFLAKE, pPlayer.getX(),
+                            pPlayer.getY() + 0.2D + pLevel.random.nextDouble(0.8), pPlayer.getZ() + pLevel.random.nextDouble(0.6),
+                            0d, 0.015d + pLevel.random.nextDouble(0.075d), 0d);
+                }
+            }
+            if (heldItem.getItem() == ModItems.WAND_LEVITATION_BLAST.get()) {
+                for (int i = 0; i < 10; i++) {
+                    pLevel.addParticle(ParticleTypes.CAMPFIRE_COSY_SMOKE, pPlayer.getX(),
                             pPlayer.getY() + 0.2D + pLevel.random.nextDouble(0.8), pPlayer.getZ() + pLevel.random.nextDouble(0.6),
                             0d, 0.015d + pLevel.random.nextDouble(0.075d), 0d);
                 }
