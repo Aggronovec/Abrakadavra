@@ -39,7 +39,7 @@ public class ModItems {
     public static final RegistryObject<Item> FIRE_BOLT_SPELL_SCROLL = ITEMS.register("fire_bolt_spell_scroll", () -> new FireBoltSpellScroll(new Item.Properties().tab(ModAbrakadavraTab.ABRAKADAVRA_TAB).
             stacksTo(1)));
 
-    public static final RegistryObject<Item> SORCERERS_MANUAL = ITEMS.register("sorcerers_manual", () -> new Item(new Item.Properties().tab(ModAbrakadavraTab.ABRAKADAVRA_TAB)));
+    public static final RegistryObject<Item> SORCERERS_MANUAL = ITEMS.register("sorcerers_manual", () -> new SorcerersManual(new Item.Properties().tab(ModAbrakadavraTab.ABRAKADAVRA_TAB)));
 
     public static void register(IEventBus eventBus) {
         ITEMS.register(eventBus);

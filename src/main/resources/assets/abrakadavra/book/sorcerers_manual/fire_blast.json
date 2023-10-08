@@ -1,0 +1,18 @@
+{
+  "parent": "root.json",
+  "text": "fire_blast.txt",
+  "title": "Fire Blast",
+  "linked_page_buttons": [
+  ],
+  "images": [
+  ],
+  "item_renders": [
+  ],
+  "recipes": [
+  ],
+  "tabula_renders": [
+  ],
+  "entity_renders": [
+
+  ]
+}
