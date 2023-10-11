@@ -16,5 +16,13 @@ public class EntityInit {
             () -> EntityType.Builder.of((EntityType.EntityFactory<FireBoltEntity>) FireBoltEntity::new, MobCategory.MISC).sized(0.1F, 0.1F).build("fire_bolt"));
     public static final RegistryObject<EntityType<LevitationBallEntity>> LEVITATION_BALL_PROJECTILE = ENTITY_TYPES.register("levitation_ball",
             () -> EntityType.Builder.of((EntityType.EntityFactory<LevitationBallEntity>) LevitationBallEntity::new, MobCategory.MISC).sized(0.1F, 0.1F).build("levitation_ball"));
+//    public static final RegistryObject<EntityType<LevitationAoEEntity>> LEVITATION_AOE = ENTITY_TYPES.register("levitation_aoe", () ->
+//            EntityType.Builder.<LevitationAoEEntity>of(LevitationAoEEntity::new, MobCategory.MISC)
+//                    .sized(1.0F, 1.0F)
+//                    .setTrackingRange(80)
+//                    .setUpdateInterval(3)
+//                    .setShouldReceiveVelocityUpdates(true)
+//                    .setTrackingRange(80)
+//                    .build( "levitation_aoe"));
 }
 

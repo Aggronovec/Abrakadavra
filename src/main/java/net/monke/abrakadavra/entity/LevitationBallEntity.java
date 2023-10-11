@@ -55,8 +55,6 @@ public class LevitationBallEntity extends AbstractArrow {
             livingEntity.addEffect(new MobEffectInstance(MobEffects.LEVITATION, 15 * 20, 0)); // Adjust the duration and amplifier as needed
             this.level.playSound(null, this.getX(), this.getY(), this.getZ(), ModSounds.LEVITATION_BALL_IMPACT.get(), SoundSource.PLAYERS, 0.8f, level.random.nextFloat() * 0.6F + 0.9F);
         }
-        // this, x, y, z, explosionStrength, setsFires, breakMode
-//       this.level.explode(this, this.getX(), this.getY(), this.getZ(), 3.0f, true, Explosion.BlockInteraction.BREAK);
     }
 
     @Override
@@ -64,9 +62,9 @@ public class LevitationBallEntity extends AbstractArrow {
 //        super.onHitBlock(ray);
         BlockState hitBlockState = this.level.getBlockState(ray.getBlockPos());
         Block hitBlock = hitBlockState.getBlock();
-//            this.level.explode(this, this.getX(), this.getY(), this.getZ(), 2.0f, true, Explosion.BlockInteraction.BREAK);
-//        this.level.playSound(null, this.getX(), this.getY(), this.getZ(), ModSounds.ICE_BOLT_IMPACT.get(), SoundSource.PLAYERS,
-//                level.random.nextFloat() * 0.5F + 0.9F, level.random.nextFloat() * 0.1F + 0.9F);
+        LivingEntity shooter = this.getOwner() instanceof LivingEntity ? (LivingEntity) this.getOwner() : null;
+//        this.level.addFreshEntity(new LevitationAoEEntity(EntityInit.LEVITATION_AOE.get(), this.level, shooter, 15*20, 0));
+        this.level.playSound(null, this.getX(), this.getY(), this.getZ(), ModSounds.LEVITATION_BALL_IMPACT.get(), SoundSource.PLAYERS, 0.8f, level.random.nextFloat() * 0.6F + 0.9F);
             this.discard();
         }
         
