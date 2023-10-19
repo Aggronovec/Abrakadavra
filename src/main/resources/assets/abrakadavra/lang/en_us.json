@@ -1,5 +1,6 @@
 {
   "item.abrakadavra.wand_handle": "Wand handle",
+  "item.abrakadavra.wizard_hat": "Wizard hat",
   "item.abrakadavra.ice_bolt_spell_scroll": "Spell Scroll of Ice Bolt",
   "item.abrakadavra.fire_bolt_spell_scroll": "Spell Scroll of Fire Bolt",
   "item.abrakadavra.levitation_blast_spell_scroll": "Spell Scroll of Levitation Blast",
@@ -18,9 +19,13 @@
 
   "itemGroup.abrakadavratab": "Abrakadavra mod",
 
-  "tooltip.abrakadavra.wand.tooltip": "No spell are assigned to this Wand",
+  "tooltip.abrakadavra.wand.tooltip": "No spell is assigned to this Wand",
   "tooltip.abrakadavra.wand_ice_bolt.tooltip": "§8Spells assigned to wand:§r Ice Bolt",
   "tooltip.abrakadavra.wand_fire_bolt.tooltip": "§8Spells assigned to wand:§r Fire Bolt",
   "tooltip.abrakadavra.wand_levitation_blast.tooltip": "§8Spells assigned to wand:§r Levitation Blast",
-  "tooltip.abrakadavra.wand_summon_demised.tooltip": "§8Spells assigned to wand:§r Summon Demised"
+  "Your wand is on cooldown for ": "Your wand is still cooling down for ",
+  "You already know the ": "You do know ",
+  " spell!": " spell already!",
+  " ticks more.": " ticks longer."
+
 }

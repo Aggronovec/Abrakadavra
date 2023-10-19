@@ -1,6 +1,5 @@
 package net.monke.abrakadavra.entity;
 
-import net.minecraft.client.particle.WaterDropParticle;
 import net.minecraft.core.particles.ParticleTypes;
 import net.minecraft.network.protocol.Packet;
 import net.minecraft.server.level.ServerPlayer;
@@ -66,8 +65,6 @@ public class FireBoltEntity extends AbstractArrow {
         BlockState hitBlockState = this.level.getBlockState(ray.getBlockPos());
         Block hitBlock = hitBlockState.getBlock();
             this.level.explode(this, this.getX(), this.getY(), this.getZ(), 2.0f, true, Explosion.BlockInteraction.DESTROY);
-//        this.level.playSound(null, this.getX(), this.getY(), this.getZ(), ModSounds.ICE_BOLT_IMPACT.get(), SoundSource.PLAYERS,
-//                level.random.nextFloat() * 0.5F + 0.9F, level.random.nextFloat() * 0.1F + 0.9F);
             this.discard();
         }
         
@@ -114,7 +111,6 @@ public class FireBoltEntity extends AbstractArrow {
         // Call super.tick() for other functionality
         super.tick();
     }
-
     @Override
     public void setBaseDamage(double pDamage) {
         pDamage = 0;
